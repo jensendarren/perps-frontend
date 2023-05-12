@@ -44,7 +44,7 @@ const GAS_PRICE_ADJUSTMENT_MAP = {
 };
 
 const MAX_GAS_PRICE_MAP = {
-  [POLYGON_ZKEVM]: 300000000000,
+  [POLYGON_ZKEVM]: 10000000000,
 };
 
 const POLYGON_RPC_PROVIDERS = process.env.REACT_APP_POLYGON_RPC_URLS.split(" ");
@@ -1869,13 +1869,13 @@ export async function setGasPrice(txnOpts, provider, chainId) {
 
   const gasPrice = await getApiGasPrice();
   if (gasPrice.gt(0)) {
-      txnOpts["gasPrice"] = gasPrice.add(premium);
+      txnOpts["gasPrice"] = gasPrice;//.add(premium);
   } else if (maxGasPrice) {
       const gasPrice = await provider.getGasPrice();
       if (gasPrice.gt(maxGasPrice)) {
-          txnOpts["gasPrice"] = bigNumberify(maxGasPrice).add(premium);
+          txnOpts["gasPrice"] = bigNumberify(maxGasPrice);//.add(premium);
       }else{
-          txnOpts["gasPrice"] = gasPrice.add(premium);
+          txnOpts["gasPrice"] = gasPrice;//.add(premium);
       }
 
       // const feeData = await provider.getFeeData();
