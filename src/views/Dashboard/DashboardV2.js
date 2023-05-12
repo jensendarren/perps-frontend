@@ -265,7 +265,7 @@ export default function DashboardV2() {
     );
   };
 
-  const totalStatsStartDate = "01 Jan 2023";
+  const totalStatsStartDate = "12 May 2023";
 
   let stableQlp = 0;
   let totalQlp = 0;
@@ -437,7 +437,7 @@ export default function DashboardV2() {
             </div>
             <div className="section-title-content">
               <div className="Page-title">Token</div>
-              <div className="Page-description">Quickswap.Trade’s Liquidity Token Index</div>
+              <div className="Page-description">Quick Perps Liquidity Token Index</div>
             </div>
           </div>
 
