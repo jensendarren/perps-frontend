@@ -254,7 +254,7 @@ export default function DashboardV2() {
               )}
               <br />
               <div>
-                <a href="https://perps.quickswap.exchange/docs/qlp" target="_blank" rel="noopener noreferrer">
+                <a href="https://perps-docs.quickswap.exchange/qlp" target="_blank" rel="noopener noreferrer">
                   More Info
                 </a>
               </div>
@@ -341,12 +341,12 @@ export default function DashboardV2() {
               {chainName} Total Stats begin on {totalStatsStartDate}.<br /> In-depth statistics:{" "}
               {chainId === POLYGON_ZKEVM && (
                 <a
-                  href="https://perps.quickswap.exchange/analytics/"
+                  href="https://perps-analytics.quickswap.exchange"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ahreftextcolor"
                 >
-                  https://perps.quickswap.exchange/analytics
+                  https://perps-analytics.quickswap.exchange
                 </a>
               )}
             </div>

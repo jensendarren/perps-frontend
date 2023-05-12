@@ -2162,7 +2162,7 @@ export default function SwapBox(props) {
             <br />
             For screenshots and more information, please see the{" "}
             <a
-              href="https://perps.quickswap.exchange/docs/trading#stop-loss-take-profit-orders"
+              href="https://perps-docs.quickswap.exchange/trading#stop-loss-take-profit-orders"
               target="_blank"
               rel="noopener noreferrer"
               className="doc-link"
@@ -2257,7 +2257,7 @@ export default function SwapBox(props) {
                       <br />
                       <br />
                       <a
-                        href=" https://perps.quickswap.exchange/docs/trading#opening-a-position"
+                        href=" https://perps-docs.quickswap.exchange/trading#opening-a-position"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="ahreftextcolorwallet"
@@ -2287,7 +2287,7 @@ export default function SwapBox(props) {
                       <br />
                       <br />
                       <a
-                        href=" https://perps.quickswap.exchange/docs/trading#opening-a-position"
+                        href=" https://perps-docs.quickswap.exchange/trading#opening-a-position"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="ahreftextcolorwallet"
@@ -2325,7 +2325,7 @@ export default function SwapBox(props) {
                       )}
                       <br />
                       <a
-                        href=" https://perps.quickswap.exchange/docs/trading#opening-a-position"
+                        href=" https://perps-docs.quickswap.exchange/trading#opening-a-position"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="ahreftextcolorwallet"
@@ -2371,12 +2371,12 @@ export default function SwapBox(props) {
         <div className="Exchange-swap-market-box-title">Useful Links</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }} className="Exchange-info-row">
           <div className="Exchange-info-label-button">
-            <a href=" https://perps.quickswap.exchange/docs/trading" target="_blank" rel="noopener noreferrer">
+            <a href="https://perps-docs.quickswap.exchange/trading-guide" target="_blank" rel="noopener noreferrer">
               Trading guide ↗
             </a>
           </div>
           <div className="Exchange-info-label-button">
-            <a href="https://perps.quickswap.exchange/leaderboard" target="_blank" rel="noopener noreferrer">
+            <a href="https://perps-leaderboard.quickswap.exchange" target="_blank" rel="noopener noreferrer">
               Leaderboard ↗
             </a>
           </div>

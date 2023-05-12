@@ -82,7 +82,7 @@ export default function TokenCard() {
                 </Link>
               </div>
 
-              <a href="https://perps.quickswap.exchange/docs/qlp" target="_blank" rel="noreferrer" className="btn-read-more">
+              <a href="https://perps-docs.quickswap.exchange/qlp" target="_blank" rel="noreferrer" className="btn-read-more">
                 Read More <RightArr />
               </a>
             </div>

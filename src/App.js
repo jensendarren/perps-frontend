@@ -111,10 +111,6 @@ const Zoom = cssTransition({
   duration: 200,
 });
 
-function inPreviewMode() {
-  return false;
-}
-
 const polygonWsProvider = new ethers.providers.WebSocketProvider(process.env.REACT_APP_POLYGON_WS);
 
 function getWsProvider(active, chainId) {
@@ -128,27 +124,6 @@ function getWsProvider(active, chainId) {
 }
 
 function AppHeaderLinks({ small, openSettings, clickCloseIcon }) {
-  if (inPreviewMode()) {
-    return (
-      <div className="App-header-links preview">
-        <div className="App-header-link-container App-header-link-home">
-          <a href="https://perps.quickswap.exchange" rel="noopener noreferrer">
-            HOME
-          </a>
-        </div>
-        <div className="App-header-link-container">
-          <NavLink activeClassName="active" to="/liquidity">
-          Liquidity
-          </NavLink>
-        </div>
-        <div className="App-header-link-container">
-          <a href="https://perps.quickswap.exchange/docs/" target="_blank" rel="noopener noreferrer">
-            ABOUT
-          </a>
-        </div>
-      </div>
-    );
-  }
   return (
     <div className="App-header-links mobile-header-padding">
       {small && (
@@ -189,7 +164,7 @@ function AppHeaderLinks({ small, openSettings, clickCloseIcon }) {
       </div>
       <div className="App-header-link-container">
           <NavLink activeClassName="active" to="/trade" className='active'>
-          Leverage
+          Perpetual
           </NavLink>
       </div>
       <div className="App-header-link-container">
@@ -202,7 +177,7 @@ function AppHeaderLinks({ small, openSettings, clickCloseIcon }) {
           Farm
         </a>
       </div>
-      <div className="App-header-link-container">
+      {/* <div className="App-header-link-container">
       <a href="https://quickswap.exchange/#/dragons" target='_blank' rel="noreferrer">
         Dragons Lair
         </a>
@@ -223,7 +198,7 @@ function AppHeaderLinks({ small, openSettings, clickCloseIcon }) {
       <a href="https://quickswap.exchange/#/convert" target='_blank' rel="noreferrer">
         Convert
         </a>
-      </div>
+      </div> */}
       <div className="App-header-link-container">
       <a href="https://quickswap.exchange/#/analytics" target='_blank' rel="noreferrer">
         Analytics
@@ -926,13 +901,6 @@ function PreviewApp() {
 }
 
 function App() {
-  if (inPreviewMode()) {
-    return (
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <PreviewApp />
-      </Web3ReactProvider>
-    );
-  }
 
   return (
     <SWRConfig value={{ refreshInterval: 5000 }}>

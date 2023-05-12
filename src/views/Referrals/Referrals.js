@@ -378,7 +378,7 @@ function Referrals({ connectWallet, setPendingTxns, pendingTxns }) {
                 {activeTab === AFFILIATES ? renderAffiliatesTab() : renderTradersTab()}
             </div>
             <a className="ref-link"
-              href="https://perps.quickswap.exchange/docs/referral-program"
+              href="https://perps-docs.quickswap.exchange/our-referral-program"
               target="_blank"
               rel="noreferrer"
             >
@@ -386,7 +386,7 @@ function Referrals({ connectWallet, setPendingTxns, pendingTxns }) {
               <span className="ref-link-icon">-&gt;</span>
             </a>
             <a className="ref-link"
-              href="https://perps.quickswap.exchange/analytics/referrals"
+              href="https://perps-analytics.quickswap.exchange/#/referrals"
               target="_blank"
               rel="noreferrer"
             >

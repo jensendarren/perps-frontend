@@ -225,7 +225,7 @@ export default function OrderEditor(props) {
       return (
         <div className="Confirmation-box-warning">
           This order will forfeit a&nbsp;
-          <a href="https://perps.quickswap.exchange/docs/trading" target="_blank" rel="noopener noreferrer">
+          <a href="https://perps-docs.quickswap.exchange/trading" target="_blank" rel="noopener noreferrer">
             profit
           </a>{" "}
           of {deltaStr}. <br />

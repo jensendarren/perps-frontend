@@ -61,8 +61,8 @@ export default function ReferralTerms(props) {
               </p>
               <p className="body-text ">
               Fee-Commissions or Fee-Discounts percentages for the default tier Tier 1, and instructions to upgrade to Tier 2 and Tier 3, are contained in{" "}
-                <a target="_blank" rel="noopener noreferrer" className="ahreftextcolor" href="https://perps.quickswap.exchange/docs/referral-program">
-                https://perps.quickswap.exchange/docs/referral-program
+                <a target="_blank" rel="noopener noreferrer" className="ahreftextcolor" href="https://perps-docs.quickswap.exchange/our-referral-program">
+                https://perps-docs.quickswap.exchange/our-referral-program
                 </a>
               </p>
             </div>
@@ -96,7 +96,7 @@ export default function ReferralTerms(props) {
               The Referral Program runs independently from Quick Perpetual, and it is determined by the tokenholders of QPX. Due to this from time to time and with or without prior notice to you, the Referral Program could be subject to modifications, suspensions or disabilities, in whole or in part, for any reason whatsoever. Quick Perpetual will not be liable for any losses suffered by you resulting from any modification to the Referral Program or from any modification, suspension, or termination, for any reason, of your access to all or any portion of the Interface or the Protocol.
               </p>
               <p className="body-text">
-              Quick Perpetual may revise these Terms from time to time. We will notify you by updating the date at the top of the Terms and by maintaining a current version of the Terms. The most current version of the Terms, which will always be at <a href="https://perps.quickswap.exchange/referral-terms" target="_blank" className="ahreftextcolor">https://perps.quickswap.exchange/referral-terms</a> . All modifications will be effective when they are posted. By using the Referral Program after those revisions become effective, you agree to be bound by the revised Terms.
+              Quick Perpetual may revise these Terms from time to time. We will notify you by updating the date at the top of the Terms and by maintaining a current version of the Terms. The most current version of the Terms, which will always be at <a href="https://perps.quickswap.exchange/#/referral-terms" target="_blank" className="ahreftextcolor">https://perps.quickswap.exchange/#/referral-terms</a> . All modifications will be effective when they are posted. By using the Referral Program after those revisions become effective, you agree to be bound by the revised Terms.
               </p>
             </div>
             <div className="section">

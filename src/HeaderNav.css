@@ -8,6 +8,11 @@
   /* display: flex; */
   font-size: 14px;
 }
+.App-header-container-nav{
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
 .App-header-container-nav a{
   color: #696C80;
   text-decoration: none;

@@ -26,7 +26,7 @@ export default function HeaderNav() {
         </NavLink>
       </div>
       <div className="App-header-link-container">
-      <a href="https://docs.quickswap.exchange/" target="_blank" rel="noopener noreferrer">
+      <a href="https://perps-docs.quickswap.exchange" target="_blank" rel="noopener noreferrer">
           <span
             className="hover-white"
           >

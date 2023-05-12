@@ -2448,11 +2448,7 @@ export function getHomeUrl() {
 }
 
 export function getRootShareApiUrl() {
-  return "https://perps.quickswap.exchange/share";
-}
-
-export function getTradePageUrl() {
-  return "https://perps.quickswap.exchange/trade";
+  return "https://perps-share.quickswap.exchange";
 }
 
 export function importImage(name) {

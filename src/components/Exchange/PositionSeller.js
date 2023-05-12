@@ -774,7 +774,7 @@ export default function PositionSeller(props) {
         return (
           <div className="Confirmation-box-warning">
             Reducing the position at the current price will forfeit a&nbsp;
-            <a href="https://perps.quickswap.exchange/docs/trading" target="_blank" rel="noopener noreferrer">
+            <a href="https://perps-docs.quickswap.exchange/trading" target="_blank" rel="noopener noreferrer">
               pending profit
             </a>{" "}
             of {deltaStr}. <br />
@@ -788,7 +788,7 @@ export default function PositionSeller(props) {
       return (
         <div className="Confirmation-box-warning">
           This order will forfeit a&nbsp;
-          <a href="https://perps.quickswap.exchange/docs/trading" target="_blank" rel="noopener noreferrer">
+          <a href="https://perps-docs.quickswap.exchange/trading" target="_blank" rel="noopener noreferrer">
             profit
           </a>{" "}
           of {deltaStr}. <br />
@@ -1101,7 +1101,7 @@ export default function PositionSeller(props) {
                       <br />
 
                       <div className="PositionSeller-fee-item">
-                        <a href="https://perps.quickswap.exchange/docs/trading" target="_blank" rel="noopener noreferrer">
+                        <a href="https://perps-docs.quickswap.exchange/trading" target="_blank" rel="noopener noreferrer">
                           More Info
                         </a>{" "}
                         about fees.
