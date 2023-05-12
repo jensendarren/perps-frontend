@@ -93,13 +93,6 @@ export default function DashboardV2() {
   // });
 
   // const totalVolumeSum = getTotalVolumeSum(totalVolume);
-  const hostname = process.env.REACT_APP_STATS_API_URL;
-  const rebalancingCashbackUrl = hostname + "/api/rebalancing-cashback";
-  const { data: rebalancingCashback } = useSWR([rebalancingCashbackUrl], {
-    fetcher: (...args) => fetch(...args).then((res) => res.json()),
-  });
-
-  const rebalancingCashbackInfo = rebalancingCashback ? rebalancingCashback.cashbackUsd * -1 : 0;
 
   const totalFees = useTotalFees();
 
