@@ -12,7 +12,7 @@ const TOKENS = {
       coingeckoUrl: "https://www.coingecko.com/en/coins/ethereum",
       isNative: true,
       isShortable: true,
-      displayDecimals:4
+      displayDecimals:2
     },
     {
       name: "Wrapped Ether",
@@ -22,7 +22,7 @@ const TOKENS = {
       coingeckoUrl: "https://www.coingecko.com/en/coins/ethereum",
       isWrapped: true,
       baseSymbol: "ETH",
-      displayDecimals:4
+      displayDecimals:2
     },
     {
       name: "Bitcoin",
