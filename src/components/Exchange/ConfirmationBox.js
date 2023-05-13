@@ -164,7 +164,7 @@ export default function ConfirmationBox(props) {
       if (isSwap) {
         return title;
       }
-      const action = isMarketOrder ? (isLong ? "Long " : "Short ") + fromToken.symbol : "Create Order";
+      const action = isMarketOrder ? (isLong ? "Long " : "Short ") + toToken.symbol : "Create Order";
 
       if (
         isMarketOrder &&

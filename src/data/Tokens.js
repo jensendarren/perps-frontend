@@ -39,7 +39,7 @@ const TOKENS = {
       decimals: 18,
       address: "0xa2036f0538221a77A3937F1379699f44945018d0",
       coingeckoUrl: "https://www.coingecko.com/en/coins/polygon",
-      isShortable: true,
+      isShortable: false,
       displayDecimals:4
     },
     {
