@@ -505,7 +505,7 @@ export default function QlpSwap(props) {
     }
 
     if (isSubmitting) {
-      return isBuying ? `Providing...` : `is selling the ...`;
+      return isBuying ? `Providing...` : `Removing Liquidity ...`;
     }
 
     return isBuying ? "Add Liquidity" : "Withdraw Liquidity";

@@ -93,13 +93,6 @@ export default function DashboardV2() {
   // });
 
   // const totalVolumeSum = getTotalVolumeSum(totalVolume);
-  const hostname = process.env.REACT_APP_STATS_API_URL;
-  const rebalancingCashbackUrl = hostname + "/api/rebalancing-cashback";
-  const { data: rebalancingCashback } = useSWR([rebalancingCashbackUrl], {
-    fetcher: (...args) => fetch(...args).then((res) => res.json()),
-  });
-
-  const rebalancingCashbackInfo = rebalancingCashback ? rebalancingCashback.cashbackUsd * -1 : 0;
 
   const totalFees = useTotalFees();
 
@@ -336,9 +329,9 @@ export default function DashboardV2() {
             />
           </div>
           <div className="section-title-content">
-            <div className="Page-title">Stats</div>
+            <div className="Page-title">Analytics</div>
             <div className="Page-description">
-              {chainName} Total Stats begin on {totalStatsStartDate}.<br /> In-depth statistics:{" "}
+              {chainName} Total Analytics begin on {totalStatsStartDate}.<br /> In-depth statistics:{" "}
               {chainId === POLYGON_ZKEVM && (
                 <a
                   href="https://perps-analytics.quickswap.exchange"
@@ -407,7 +400,7 @@ export default function DashboardV2() {
                   <div>${formatAmount(totalFees, USD_DECIMALS, 0, true)}</div>
                 </div>
                 <div className="App-card-row padding-left">
-                  <div className="label">Collected fees from May 15, 2023</div>
+                  <div className="label">Collected fees from May 12, 2023</div>
                   <div>${numberWithCommas(totalFeesDistributed.toFixed(0))}</div>
                 </div>
               </div>
