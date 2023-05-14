@@ -162,12 +162,14 @@ export default function DashboardV2() {
   let qlpPrice;
   let qlpSupply;
   let qlpMarketCap;
-  if (aum && totalSupplies && totalSupplies[3]) {
-    qlpSupply = totalSupplies[3];
+  if (aum && totalSupplies && totalSupplies[1]) {
+    
+    qlpSupply = totalSupplies[1];
     qlpPrice =
       aum && aum.gt(0) && qlpSupply.gt(0)
         ? aum.mul(expandDecimals(1, QLP_DECIMALS)).div(qlpSupply)
         : expandDecimals(1, USD_DECIMALS);
+
     qlpMarketCap = qlpPrice.mul(qlpSupply).div(expandDecimals(1, QLP_DECIMALS));
   }
 
