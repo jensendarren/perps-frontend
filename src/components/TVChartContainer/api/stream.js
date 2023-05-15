@@ -119,7 +119,7 @@ async function connect() {
         chartSubcription.listener(_lastBar);
         chartSubcription.lastBar = _lastBar;
       }
-    }, 10000);
+    }, 3000);
 
 
   } catch (error) {}
