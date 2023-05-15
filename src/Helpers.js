@@ -340,7 +340,7 @@ export function getServerBaseUrl(chainId) {
 }
 
 export function getServerUrl(chainId, path) {
-  return `${getServerBaseUrl(chainId)}${path}`;
+  return `${getServerBaseUrl(chainId)}${path}`.replace(/\/\//g, "/");
 }
 
 export function isTriggerRatioInverted(fromTokenInfo, toTokenInfo) {
