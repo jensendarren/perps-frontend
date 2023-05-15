@@ -324,6 +324,10 @@ export function getMarginFee(sizeDelta) {
 }
 
 export function getServerBaseUrl(chainId) {
+  let serverBaseUrl = process.env.REACT_APP_QPX_API_POLYGON_URL;
+  if(serverBaseUrl.at(-1) === '/'){
+    serverBaseUrl = serverBaseUrl.substring(0,serverBaseUrl.length-1)
+  }
   if (!chainId) {
     throw new Error("chainId is not provided");
   }
@@ -334,13 +338,13 @@ export function getServerBaseUrl(chainId) {
     }
   }
   if (chainId === POLYGON_ZKEVM) {
-    return process.env.REACT_APP_QPX_API_POLYGON_URL;
+    return serverBaseUrl;
   }
-  return process.env.REACT_APP_QPX_API_POLYGON_URL;
+  return serverBaseUrl;
 }
 
 export function getServerUrl(chainId, path) {
-  return `${getServerBaseUrl(chainId)}${path}`.replace(/\/\//g, "/");
+  return `${getServerBaseUrl(chainId)}${path}`;
 }
 
 export function isTriggerRatioInverted(fromTokenInfo, toTokenInfo) {
