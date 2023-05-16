@@ -164,7 +164,7 @@ function AppHeaderLinks({ small, openSettings, clickCloseIcon }) {
       </div>
       <div className="App-header-link-container">
           <NavLink activeClassName="active" to="/trade" className='active'>
-          Perpetual
+          Perps
           </NavLink>
       </div>
       <div className="App-header-link-container">
@@ -175,6 +175,11 @@ function AppHeaderLinks({ small, openSettings, clickCloseIcon }) {
       <div className="App-header-link-container">
       <a href="https://quickswap.exchange/#/farm" target='_blank' rel="noreferrer">
           Farm
+        </a>
+      </div>
+      <div className="App-header-link-container">
+      <a href="https://zksafe.quickswap.exchange/welcome" target='_blank' rel="noreferrer">
+          Safe
         </a>
       </div>
       {/* <div className="App-header-link-container">

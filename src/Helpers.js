@@ -102,8 +102,8 @@ export const STOP = "Stop";
 export const LEVERAGE_ORDER_OPTIONS = [MARKET, LIMIT, STOP];
 export const SWAP_ORDER_OPTIONS = [MARKET, LIMIT];
 export const SWAP_OPTIONS = [LONG, SHORT, SWAP];
-export const DEFAULT_SLIPPAGE_AMOUNT = 30;
-export const DEFAULT_HIGHER_SLIPPAGE_AMOUNT = 100;
+export const DEFAULT_SLIPPAGE_AMOUNT = 100;
+export const DEFAULT_HIGHER_SLIPPAGE_AMOUNT = 200;
 
 export const SLIPPAGE_BPS_KEY = "Exchange-swap-slippage-basis-points-v3";
 export const CLOSE_POSITION_RECEIVE_TOKEN_KEY = "Close-position-receive-token";

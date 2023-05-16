@@ -920,7 +920,7 @@ export default function PositionSeller(props) {
             {orderOption === MARKET && (
               <div className="PositionEditor-allow-higher-slippage">
                 <Checkbox isChecked={isHigherSlippageAllowed} setIsChecked={setIsHigherSlippageAllowed}>
-                  <span className="muted font-sm">Allow up to 1% slippage</span>
+                  <span className="muted font-sm">Allow up to 2% slippage</span>
                 </Checkbox>
               </div>
             )}

@@ -86,9 +86,9 @@ export default function Footer() {
               <a href='https://quickswap.exchange/#/swap'>Swap</a>
               <a href='https://quickswap.exchange/#/pools'>Pool</a>
               <a href='https://quickswap.exchange/#/farm'>Farm</a>
-              <a href='https://quickswap.exchange/#/dragons'>Dragons Lair</a>
+              {/* <a href='https://quickswap.exchange/#/dragons'>Dragons Lair</a>
               <a href='https://quickswap.exchange/#/predictions'>Predictions</a>
-              <a href='https://quickswap.exchange/#/convert'>Convert</a>
+              <a href='https://quickswap.exchange/#/convert'>Convert</a> */}
               <a href='https://quickswap.exchange/#/analytics'>Analytics</a>
             </div>
           </div>

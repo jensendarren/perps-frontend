@@ -609,7 +609,7 @@ export default function ConfirmationBox(props) {
           {isMarketOrder && (
             <div className="PositionEditor-allow-higher-slippage Exchange-info-label">
               <Checkbox isChecked={isHigherSlippageAllowed} setIsChecked={setIsHigherSlippageAllowed}>
-                <span>Allow up to 1% slippage</span>
+                <span>Allow up to 2% slippage</span>
               </Checkbox>
             </div>
           )}
