@@ -83,46 +83,46 @@ export default function Footer() {
           <div>
             <h3 >Services</h3>
             <div className="links-content ">
-              <a href='https://quickswap.exchange/#/swap'>Swap</a>
-              <a href='https://quickswap.exchange/#/pools'>Pool</a>
-              <a href='https://quickswap.exchange/#/farm'>Farm</a>
+              <a href='https://quickswap.exchange/#/swap' target="_blank">Swap</a>
+              <a href='https://quickswap.exchange/#/pools' target="_blank">Pool</a>
+              <a href='https://quickswap.exchange/#/farm' target="_blank">Farm</a>
               {/* <a href='https://quickswap.exchange/#/dragons'>Dragons Lair</a>
               <a href='https://quickswap.exchange/#/predictions'>Predictions</a>
               <a href='https://quickswap.exchange/#/convert'>Convert</a> */}
-              <a href='https://quickswap.exchange/#/analytics'>Analytics</a>
+              <a href='https://quickswap.exchange/#/analytics' target="_blank">Analytics</a>
             </div>
           </div>
           <div >
             <h3 >Developers</h3>
             <div className="links-content ">
-              <a href='https://github.com/QuickSwap'>GitHub</a>
-              <a href='https://github.com/QuickSwap'> GitBook</a>
-              <a href='https://docs.quickswap.exchange/'>Docs</a>
+              <a href='https://github.com/QuickSwap' target="_blank">GitHub</a>
+              <a href='https://github.com/QuickSwap' target="_blank"> GitBook</a>
+              <a href='https://docs.quickswap.exchange/' target="_blank">Docs</a>
             </div>
           </div>
           <div>
             <h3 >Governance</h3>
             <div className="links-content ">
-              <a href='https://snapshot.org/#/quickvote.eth'>Vote</a>
+              <a href='https://snapshot.org/#/quickvote.eth' target="_blank">Vote</a>
             </div>
           </div>
           <div>
             <h3 >Partners</h3>
             <div className="links-content ">
-              <a href=''>Gamma</a>
-              <a href=''>Algebra</a>
-              <a href=''>Apply!</a>
+            <a href='https://quickswap.gamma.xyz/' target="_blank">Gamma</a>
+            <a href='https://algebra.finance/' target="_blank">Algebra</a>
+            <a href='https://gravityfinance.io/' target="_blank">Gravity&nbsp;Finance</a>
             </div>
           </div>
 
         </div>
       </div>
       <div className="footer-divider "></div>
-      <a href='https://quickswap.exchange/#/swap'>
+      <a href='https://quickswap.exchange/#/swap' target="_blank">
         © 2023 QuickSwap
       </a>
       <div style={{ float: 'right' }}>
-        <a href='https://quickswap.exchange/#/swap'>Terms of Use</a>
+        <a href='https://quickswap.exchange/#/swap' target="_blank">Terms of Use</a>
         {lastSubgraphBlock && lastBlock && (
           <a href={`https://zkevm.polygonscan.com/block/${lastSubgraphBlock.number}`}
             target="_blank"
