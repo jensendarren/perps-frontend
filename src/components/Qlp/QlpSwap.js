@@ -893,13 +893,13 @@ export default function QlpSwap(props) {
         <div className="Page-title">Save Fees</div>
         {isBuying && (
           <div className="Page-description">
-            The fees can be vary based on the asset you wish to add liquidity for QLP.
+            The fees can  vary based on the asset you wish to add liquidity for QLP.
             <br /> Enter the requested amount of QLP or asset to be added into the interface and compare the fees here.
           </div>
         )}
         {!isBuying && (
           <div className="Page-description">
-            The fees can be vary based on the asset you wish to add liquidity for QLP.
+            The fees can  vary based on the asset you wish to add liquidity for QLP.
             <br /> Enter the requested amount of QLP or asset to be added into the interface and compare the fees here.
           </div>
         )}

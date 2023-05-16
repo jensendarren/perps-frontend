@@ -26,6 +26,24 @@ export default function HeaderNav() {
         </NavLink>
       </div>
       <div className="App-header-link-container">
+      <a href="https://perps-leaderboard.quickswap.exchange" target="_blank" rel="noopener noreferrer">
+          <span
+            className="hover-white"
+          >
+            Leaderboard
+          </span>
+        </a>
+      </div>
+      <div className="App-header-link-container">
+      <a href="https://perps-analytics.quickswap.exchange" target="_blank" rel="noopener noreferrer">
+          <span
+            className="hover-white"
+          >
+            Analytics
+          </span>
+        </a>
+      </div>
+      <div className="App-header-link-container">
       <a href="https://perps-docs.quickswap.exchange" target="_blank" rel="noopener noreferrer">
           <span
             className="hover-white"

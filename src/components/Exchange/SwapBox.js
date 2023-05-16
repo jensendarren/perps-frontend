@@ -2375,11 +2375,11 @@ export default function SwapBox(props) {
               Trading guide ↗
             </a>
           </div>
-          <div className="Exchange-info-label-button">
+          {/* <div className="Exchange-info-label-button">
             <a href="https://perps-leaderboard.quickswap.exchange" target="_blank" rel="noopener noreferrer">
               Leaderboard ↗
             </a>
-          </div>
+          </div> */}
           {/* <div className="Exchange-info-label-button">
             <a href="https://perps.quickswap.exchange/#/orders_overview" target="_blank" rel="noopener noreferrer">
               Orders Overview ↗

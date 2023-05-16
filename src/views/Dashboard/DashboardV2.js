@@ -331,10 +331,11 @@ export default function DashboardV2() {
             />
           </div>
           <div className="section-title-content">
-            <div className="Page-title">Analytics</div>
+            <div className="Page-title">Dashboard</div>
             <div className="Page-description">
-              {chainName} Total Analytics begin on {totalStatsStartDate}.<br /> In-depth statistics:{" "}
-              {chainId === POLYGON_ZKEVM && (
+              {chainName} started on {totalStatsStartDate}.
+              {/* <br /> In-depth statistics:{" "} */}
+              {/* {chainId === POLYGON_ZKEVM && (
                 <a
                   href="https://perps-analytics.quickswap.exchange"
                   target="_blank"
@@ -343,7 +344,7 @@ export default function DashboardV2() {
                 >
                   https://perps-analytics.quickswap.exchange
                 </a>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -432,7 +433,7 @@ export default function DashboardV2() {
             </div>
             <div className="section-title-content">
               <div className="Page-title">Token</div>
-              <div className="Page-description">Quick Perps Liquidity Token Index</div>
+              <div className="Page-description">QuickPerps Liquidity Token Index</div>
             </div>
           </div>
 
@@ -550,7 +551,7 @@ export default function DashboardV2() {
               </div>
             </div>
             <div className="token-table-wrapper App-card">
-              <div className="App-card-title">Quickswap.Trade Liquidity Pool</div>
+              <div className="App-card-title">QuickPerps Liquidity Pool</div>
               <div className="App-card-divider"></div>
               <table className="token-table">
                 <thead>
