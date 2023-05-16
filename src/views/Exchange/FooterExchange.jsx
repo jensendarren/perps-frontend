@@ -46,7 +46,7 @@ export default function Footer() {
         </a>
         <a
           style={{ textDecoration: "none" }}
-          href="https://twitter.com/QuickperpTRADE"
+          href="https://twitter.com/QuickswapDEX"
           target="_blank"
           rel="noreferrer"
           className="footer-link--container"
