@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet";
 function SEO(props) {
   const { children, ...customMeta } = props;
   const meta = {
-    title: "Quick Perpetual - Perpetual trading exchange",
-    description: `Trade spot or perpetual BTC, ETH, MATIC and other top cryptocurrencies with up to 30x leverage directly from your wallet on Polygon.`,
+    title: "QuickPerps - Perpetual trading exchange",
+    description: `Trade spot or perpetual BTC, ETH, MATIC and other top cryptocurrencies with up to 50x leverage directly from your wallet on Polygon zkEVM.`,
     image: "https://perps.quickswap.exchange/android-chrome-512x512.png",
     type: "exchange",
     ...customMeta,
@@ -21,7 +21,7 @@ function SEO(props) {
         <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={meta.image} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@QuickperpDAO" />
+        <meta name="twitter:site" content="@QuickswapDEX" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
