@@ -64,7 +64,8 @@ import "./QlpSwap.css";
 import AssetDropdown from "../../views/Dashboard/AssetDropdown";
 import { getImageUrl } from "../../cloudinary/getImageUrl";
 import Stake from "../../views/Stake/Stake";
-import TooltipComponent from "../../components/Tooltip/Tooltip";
+import AIRDROPAPR from "../../assets/icons/airdropAPR.jpg";
+import TooltipWithPortal from "../Tooltip/TooltipWithPortal";
 
 const { AddressZero } = ethers.constants;
 
@@ -712,14 +713,15 @@ export default function QlpSwap(props) {
             )} */}
             <div className="App-card-row">
               <div className="label">APR</div>
-              <div className="value">
-                <span className="positive">
-                  <TooltipComponent
-                    handle={`${formatAmount(totalApr.add(quickAPR), 2, 2, true)}%`}
-                    position="right-bottom"
-                    renderContent={() => <>Fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Airdrop APR: {formatAmount(quickAPR, 2, 2, true)}%</>}
-                  />
+              <div className="value flex">
+                <span className="positive" style={{ marginRight: 6 }}>
+                  {formatAmount(totalApr.add(quickAPR), 2, 2, true)}%
                 </span>
+                <TooltipWithPortal
+                  handle={<img src={AIRDROPAPR} alt='airdrop APR' width={24} />}
+                  position="right-bottom"
+                  renderContent={() => <>Fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Airdrop APR: {formatAmount(quickAPR, 2, 2, true)}%</>}
+                />
                 {/* <Tooltip
                   className="positive"
                   handle={`${formatAmount(totalApr, 2, 2, true)}%`}

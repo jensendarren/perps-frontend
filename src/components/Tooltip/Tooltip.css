@@ -1,5 +1,6 @@
 .Tooltip {
   position: relative;
+  display: flex;
 }
 
 .Tooltip-popup {
