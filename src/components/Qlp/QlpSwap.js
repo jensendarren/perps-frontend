@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useWeb3React } from "@web3-react/core";
@@ -64,6 +64,7 @@ import "./QlpSwap.css";
 import AssetDropdown from "../../views/Dashboard/AssetDropdown";
 import { getImageUrl } from "../../cloudinary/getImageUrl";
 import Stake from "../../views/Stake/Stake";
+import TooltipComponent from "../../components/Tooltip/Tooltip";
 
 const { AddressZero } = ethers.constants;
 
@@ -257,6 +258,14 @@ export default function QlpSwap(props) {
   };
 
   const nativeToken = getTokenInfo(infoTokens, AddressZero);
+
+  const quickAPR = useMemo(() => {
+    if (qlpPrice && qlpPrice.gt(0) && qlpSupplyUsd && qlpSupplyUsd.gt(0)) {
+      return qlpPrice.mul(bigNumberify(4000000).mul(bigNumberify(365))).div(qlpSupplyUsd)
+    }
+    return bigNumberify(0)
+  }, [qlpPrice, qlpSupplyUsd]);
+
 
   let totalApr = bigNumberify(0);
 
@@ -704,7 +713,13 @@ export default function QlpSwap(props) {
             <div className="App-card-row">
               <div className="label">APR</div>
               <div className="value">
-                <span className="positive">{formatAmount(totalApr, 2, 2, true)}%</span>
+                <span className="positive">
+                  <TooltipComponent
+                    handle={`${formatAmount(totalApr.add(quickAPR), 2, 2, true)}%`}
+                    position="right-bottom"
+                    renderContent={() => <>Fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Airdrop APR: {formatAmount(quickAPR, 2, 2, true)}%</>}
+                  />
+                </span>
                 {/* <Tooltip
                   className="positive"
                   handle={`${formatAmount(totalApr, 2, 2, true)}%`}
