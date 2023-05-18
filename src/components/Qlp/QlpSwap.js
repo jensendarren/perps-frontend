@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useWeb3React } from "@web3-react/core";
@@ -42,7 +42,7 @@ import {
   QPXQLP_DISPLAY_DECIMALS,
 } from "../../Helpers";
 
-import { callContract, useInfoTokens } from "../../Api";
+import { callContract, useInfoTokens, useQuickInfo } from "../../Api";
 
 import TokenSelector from "../Exchange/TokenSelector";
 import BuyInputSection from "../BuyInputSection/BuyInputSection";
@@ -64,6 +64,8 @@ import "./QlpSwap.css";
 import AssetDropdown from "../../views/Dashboard/AssetDropdown";
 import { getImageUrl } from "../../cloudinary/getImageUrl";
 import Stake from "../../views/Stake/Stake";
+import AIRDROPAPR from "../../assets/icons/airdropAPR.jpg";
+import TooltipWithPortal from "../Tooltip/TooltipWithPortal";
 
 const { AddressZero } = ethers.constants;
 
@@ -257,6 +259,17 @@ export default function QlpSwap(props) {
   };
 
   const nativeToken = getTokenInfo(infoTokens, AddressZero);
+
+  const quickInfo = useQuickInfo(POLYGON_ZKEVM);
+  const quickPrice = quickInfo ? Number(quickInfo.derivedMatic) * Number(formatAmount(nativeToken.minPrice, USD_DECIMALS, 6)) : 0;
+
+  const quickAPR = useMemo(() => {
+    if (quickPrice > 0 && qlpSupplyUsd && qlpSupplyUsd > 0) {
+      const qlpSupplyNumber = Number(formatAmount(qlpSupplyUsd, USD_DECIMALS, 2, false))
+      return quickPrice * 4000000 * 365 / qlpSupplyNumber
+    }
+    return 0
+  }, [quickPrice, qlpSupplyUsd]);
 
   let totalApr = bigNumberify(0);
 
@@ -703,8 +716,15 @@ export default function QlpSwap(props) {
             )} */}
             <div className="App-card-row">
               <div className="label">APR</div>
-              <div className="value">
-                <span className="positive">{formatAmount(totalApr, 2, 2, true)}%</span>
+              <div className="value flex">
+                <span className="positive" style={{ marginRight: 6 }}>
+                  {quickAPR.toLocaleString()}%
+                </span>
+                <TooltipWithPortal
+                  handle={<img src={AIRDROPAPR} alt='airdrop APR' width={24} />}
+                  position="right-bottom"
+                  renderContent={() => <>Fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Airdrop APR: {quickAPR.toLocaleString()}%</>}
+                />
                 {/* <Tooltip
                   className="positive"
                   handle={`${formatAmount(totalApr, 2, 2, true)}%`}
