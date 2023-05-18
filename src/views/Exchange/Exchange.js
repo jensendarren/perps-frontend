@@ -48,6 +48,7 @@ import TradeHistory from "../../components/Exchange/TradeHistory";
 import ExchangeWalletTokens from "../../components/Exchange/ExchangeWalletTokens";
 import Tab from "../../components/Tab/Tab";
 import Footer from "../../Footer";
+import Disclaimer from "../../components/Exchange/Disclaimer";
 
 import "./Exchange.css";
 const { AddressZero } = ethers.constants;
@@ -747,7 +748,16 @@ export const Exchange = forwardRef((props, ref) => {
       });
   };
 
+  const [disclaimerVisible, setDisclaimerVisible] = useState(false);
+  const [approvePositionRouterSentMsg, setApprovePositionRouterSentMsg] = useState("");
+  const [approvePositionRouterFailMsg, setApprovePositionRouterFailMsg] = useState("");
   const approvePositionRouter = ({ sentMsg, failMsg }) => {
+    setDisclaimerVisible(true);
+    setApprovePositionRouterSentMsg(sentMsg);
+    setApprovePositionRouterFailMsg(failMsg);
+  };
+
+  const approvePositionRouterAction = async ({ sentMsg, failMsg }) => {
     setIsPositionRouterApproving(true);
     return approvePlugin(chainId, positionRouterAddress, {
       library,
@@ -969,6 +979,13 @@ export const Exchange = forwardRef((props, ref) => {
         </div>
         <div className="Exchange-lists small">{getListSection()}</div>
       </div>
+      <Disclaimer
+        isVisible={disclaimerVisible}
+        setIsVisible={setDisclaimerVisible}
+        sentMsg={approvePositionRouterSentMsg}
+        failMsg={approvePositionRouterFailMsg}
+        action={approvePositionRouterAction}
+      />
       <Footer />
     </div>
   );
