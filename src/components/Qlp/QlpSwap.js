@@ -1014,8 +1014,8 @@ export default function QlpSwap(props) {
               function renderFees() {
                 const swapUrl =
                   chainId === POLYGON_ZKEVM
-                        ? `https://quickswap.exchange/#/swap`
-                    : `https://traderjoexyz.com/trade?inputCurrency=${token.address}`;
+                        ? `https://quickswap.exchange/#/swap?currency0=${token.address}`
+                        : `https://quickswap.exchange/#/swap?currency0=${token.address}`;
                 switch (true) {
                   case (isBuying && isCapReached) || (!isBuying && managedUsd?.lt(1)):
                     return (
