@@ -1048,7 +1048,7 @@ export default function QlpSwap(props) {
                             <br />
                             <p>
                               <a href={swapUrl} target="_blank" rel="noreferrer">
-                                Swap on {chainId === POLYGON_ZKEVM ? "Uniswap" : "Trader Joe"}
+                                        Swap on {chainId === POLYGON_ZKEVM ? "Quickswap" : "Trader Joe"}
                               </a>
                             </p>
                           </div>
