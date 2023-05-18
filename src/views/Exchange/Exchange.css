@@ -9,10 +9,23 @@
     padding: 0 10px;
   }
 }
-
+@media (max-width: 480px) {
+  .Exchange-list-tab-container{
+    flex-direction: column-reverse;
+    align-items:flex-start;
+  }
+}
+@media (min-width: 480px) {
+  .Exchange-list-tab-container {
+    align-items: center;
+  }
+}
 .Exchange-list-tab-container {
-  display: grid;
-  grid-template-columns: auto auto;
+  /* display: grid; */
+  /* grid-template-columns: auto auto; */
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   margin-top: 1rem;
@@ -21,7 +34,7 @@
 
 .Exchange-should-show-position-lines {
   margin: auto 0;
-  font-size: 1rem;
+  /* font-size: 1rem; */
   color: #696C80;
 }
 
