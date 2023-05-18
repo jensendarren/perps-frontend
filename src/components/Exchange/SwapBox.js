@@ -1043,7 +1043,7 @@ export default function SwapBox(props) {
     const swapTokenSymbol = isLong ? toToken.symbol : shortCollateralToken.symbol;
     const inputTokenSymbol = isLong ? fromToken.symbol : shortCollateralToken.symbol;
 
-    let uniswapUrl = `https://app.uniswap.org/#/swap`;
+      let uniswapUrl = `https://quickswap.exchange/#/swap`;
     let kyberswapUrl = `https://kyberswap.com/swap/polygon/${inputCurrency}-to-${outputCurrency}`;
     const label =
       modalError === "BUFFER" ? `${shortCollateralToken.symbol} Required` : `${fromToken.symbol} Capacity Reached`;
