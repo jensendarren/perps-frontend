@@ -38,7 +38,7 @@ import {
 } from "../Helpers";
 import { getTokens, getWhitelistedTokens } from "../data/Tokens";
 
-import { polygonGraphClient, positionsGraphClient } from "./common";
+import { polygonGraphClient, positionsGraphClient, quickGraphClient } from "./common";
 import { groupBy } from "lodash";
 export * from "./prices";
 
@@ -47,6 +47,13 @@ const { AddressZero } = ethers.constants;
 function getQpxGraphClient(chainId) {
   if (chainId === POLYGON_ZKEVM) {
     return polygonGraphClient;
+  }
+  throw new Error(`Unsupported chain ${chainId}`);
+}
+
+function getQuickGraphClient(chainId) {
+  if (chainId === POLYGON_ZKEVM) {
+    return quickGraphClient;
   }
   throw new Error(`Unsupported chain ${chainId}`);
 }
@@ -73,6 +80,23 @@ export function useAllOrdersStats(chainId) {
   }, [setRes, query, chainId]);
 
   return res ? res.data.orderStat : null;
+}
+
+export function useQuickInfo(chainId) {
+  const query = gql(`{
+    token (id: "0x68286607a1d43602d880d349187c3c48c0fd05e6") {
+      id
+      derivedMatic
+    }
+  }`);
+
+  const [res, setRes] = useState();
+
+  useEffect(() => {
+    getQuickGraphClient(chainId).query({ query }).then(setRes).catch(console.warn);
+  }, [query, chainId]);
+
+  return res ? res.data.token : null;
 }
 
 export function useInfoTokens(library, chainId, active, tokenBalances, fundingRateInfo, vaultPropsLength) {

@@ -42,7 +42,7 @@ import {
   QPXQLP_DISPLAY_DECIMALS,
 } from "../../Helpers";
 
-import { callContract, useInfoTokens } from "../../Api";
+import { callContract, useInfoTokens, useQuickInfo } from "../../Api";
 
 import TokenSelector from "../Exchange/TokenSelector";
 import BuyInputSection from "../BuyInputSection/BuyInputSection";
@@ -260,13 +260,16 @@ export default function QlpSwap(props) {
 
   const nativeToken = getTokenInfo(infoTokens, AddressZero);
 
-  const quickAPR = useMemo(() => {
-    if (qlpPrice && qlpPrice.gt(0) && qlpSupplyUsd && qlpSupplyUsd.gt(0)) {
-      return qlpPrice.mul(bigNumberify(4000000).mul(bigNumberify(365))).div(qlpSupplyUsd)
-    }
-    return bigNumberify(0)
-  }, [qlpPrice, qlpSupplyUsd]);
+  const quickInfo = useQuickInfo(POLYGON_ZKEVM);
+  const quickPrice = quickInfo ? Number(quickInfo.derivedMatic) * Number(formatAmount(nativeToken.minPrice, USD_DECIMALS, 6)) : 0;
 
+  const quickAPR = useMemo(() => {
+    if (quickPrice > 0 && qlpSupplyUsd && qlpSupplyUsd > 0) {
+      const qlpSupplyNumber = Number(formatAmount(qlpSupplyUsd, USD_DECIMALS, 2, false))
+      return quickPrice * 4000000 * 365 / qlpSupplyNumber
+    }
+    return 0
+  }, [quickPrice, qlpSupplyUsd]);
 
   let totalApr = bigNumberify(0);
 
@@ -715,12 +718,12 @@ export default function QlpSwap(props) {
               <div className="label">APR</div>
               <div className="value flex">
                 <span className="positive" style={{ marginRight: 6 }}>
-                  {formatAmount(totalApr.add(quickAPR), 2, 2, true)}%
+                  {quickAPR.toLocaleString()}%
                 </span>
                 <TooltipWithPortal
                   handle={<img src={AIRDROPAPR} alt='airdrop APR' width={24} />}
                   position="right-bottom"
-                  renderContent={() => <>Fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Airdrop APR: {formatAmount(quickAPR, 2, 2, true)}%</>}
+                  renderContent={() => <>Fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Airdrop APR: {quickAPR.toLocaleString()}%</>}
                 />
                 {/* <Tooltip
                   className="positive"
