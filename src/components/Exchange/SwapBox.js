@@ -1043,7 +1043,7 @@ export default function SwapBox(props) {
     const swapTokenSymbol = isLong ? toToken.symbol : shortCollateralToken.symbol;
     const inputTokenSymbol = isLong ? fromToken.symbol : shortCollateralToken.symbol;
 
-      let uniswapUrl = `https://quickswap.exchange/#/swap`;
+      let quickswapUrl = `https://quickswap.exchange/#/swap`;
     let kyberswapUrl = `https://kyberswap.com/swap/polygon/${inputCurrency}-to-${outputCurrency}`;
     const label =
       modalError === "BUFFER" ? `${shortCollateralToken.symbol} Required` : `${fromToken.symbol} Capacity Reached`;
@@ -1060,17 +1060,17 @@ export default function SwapBox(props) {
             </p>
           )}
           <div style={{ display: "flex", alignItems: "center", flexDirection: "column", gap: "10px" }}>
-            <a style={{ textDecoration: "none", color: "#ffaa27" }} href={uniswapUrl} target="_blank" rel="noreferrer">
+                    <a style={{ textDecoration: "none", color: "#ffaa27" }} href={quickswapUrl} target="_blank" rel="noreferrer">
                         Buy {swapTokenSymbol} on Quickswap
             </a>
-            <a
+            {/* <a
               style={{ textDecoration: "none", color: "#ffaa27" }}
               href={kyberswapUrl}
               target="_blank"
               rel="noreferrer"
             >
               Buy {swapTokenSymbol} on KyberSwap
-            </a>
+            </a> */}
           </div>
         </div>
       </Modal>
