@@ -723,7 +723,7 @@ export default function QlpSwap(props) {
                 <TooltipWithPortal
                   handle={<img src={AIRDROPAPR} alt='airdrop APR' width={24} />}
                   position="right-bottom"
-                  renderContent={() => <>Fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Airdrop APR: {quickAPR.toLocaleString()}%</>}
+                  renderContent={() => <>Eth fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Quick airdrop APR: {quickAPR.toLocaleString()}%</>}
                 />
                 {/* <Tooltip
                   className="positive"
