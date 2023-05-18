@@ -1061,7 +1061,7 @@ export default function SwapBox(props) {
           )}
           <div style={{ display: "flex", alignItems: "center", flexDirection: "column", gap: "10px" }}>
             <a style={{ textDecoration: "none", color: "#ffaa27" }} href={uniswapUrl} target="_blank" rel="noreferrer">
-              Buy {swapTokenSymbol} on Uniswap
+                        Buy {swapTokenSymbol} on Quickswap
             </a>
             <a
               style={{ textDecoration: "none", color: "#ffaa27" }}
