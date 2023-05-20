@@ -385,7 +385,6 @@ export function useTrades(chainId, account) {
       ? `${getServerBaseUrl(chainId)}/actions?account=${account}`
       : `${getServerBaseUrl(chainId)}/actions`;
   const { data: trades, mutate: updateTrades } = useSWR(url, {
-    dedupingInterval: 10000,
     fetcher: (...args) => fetch(...args).then((res) => res.json()),
   });
 
@@ -436,12 +435,14 @@ export function useMinExecutionFee(library, active, chainId, infoTokens) {
   const positionRouterAddress = getContract(chainId, "PositionRouter");
   const nativeTokenAddress = getContract(chainId, "NATIVE_TOKEN");
 
-  const { data: minExecutionFee } = useSWR([active, chainId, positionRouterAddress, "minExecutionFee"], {
-    fetcher: fetcher(library, PositionRouter),
+  const { data: minExecutionFee } = useSWR([active, chainId, positionRouterAddress, ""], {
+      dedupingInterval: 60000,
+      fetcher: fetcher(library, PositionRouter),
   });
 
   const { data: gasPrice } = useSWR(["gasPrice", chainId], {
-    fetcher: () => {
+      dedupingInterval: 30000,
+      fetcher: () => {
       return new Promise(async (resolve, reject) => {
         const provider = getProvider(library, chainId);
         if (!provider) {
@@ -508,6 +509,7 @@ export function useReferrerTier(library, chainId, account) {
   const { data: referrerTier, mutate: mutateReferrerTier } = useSWR(
     account && [`ReferralStorage:referrerTiers`, chainId, referralStorageAddress, "referrerTiers", account],
     {
+      dedupingInterval: 60000,
       fetcher: fetcher(library, ReferralStorage),
     }
   );
@@ -521,6 +523,7 @@ export function useCodeOwner(library, chainId, account, code) {
   const { data: codeOwner, mutate: mutateCodeOwner } = useSWR(
     account && code && [`ReferralStorage:codeOwners`, chainId, referralStorageAddress, "codeOwners", code],
     {
+      dedupingInterval: 30000,
       fetcher: fetcher(library, ReferralStorage),
     }
   );

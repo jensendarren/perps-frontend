@@ -119,16 +119,19 @@ export default function DashboardV2() {
   const tokensForSupplyQuery = [qlpAddress, usdqAddress];
 
   const { data: aums } = useSWR([`Dashboard:getAums:${active}`, chainId, qlpManagerAddress, "getAums"], {
-    fetcher: fetcher(library, QlpManager),
+      dedupingInterval: 20000,
+      fetcher: fetcher(library, QlpManager),
   });
 
   const { data: fees } = useSWR([`Dashboard:fees:${active}`, chainId, readerAddress, "getFees", vaultAddress], {
-    fetcher: fetcher(library, Reader, [whitelistedTokenAddresses]),
+      dedupingInterval: 30000,
+      fetcher: fetcher(library, Reader, [whitelistedTokenAddresses]),
   });
 
   const { data: totalSupplies } = useSWR(
     [`Dashboard:totalSupplies:${active}`, chainId, readerAddress, "getTokenBalancesWithSupplies", AddressZero],
     {
+      dedupingInterval: 30000,
       fetcher: fetcher(library, Reader, [tokensForSupplyQuery]),
     }
   );
@@ -136,6 +139,7 @@ export default function DashboardV2() {
   const { data: totalTokenWeights } = useSWR(
     [`QlpSwap:totalTokenWeights:${active}`, chainId, vaultAddress, "totalTokenWeights"],
     {
+      dedupingInterval: 30000,
       fetcher: fetcher(library, Vault),
     }
   );
