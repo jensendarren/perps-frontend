@@ -1476,7 +1476,7 @@ export const fetcher = (library, contractInfo, additionalArgs) => (...args) => {
 
     setTimeout(() => {
       handleFallback(resolve, reject, "contractCall timeout")
-    }, 2000)
+    }, 20000)
   })
 };
 
@@ -1663,7 +1663,6 @@ export function useAccountOrders(flagOrdersEnabled, overrideAccount) {
     mutate: updateOrders,
     error: ordersError,
   } = useSWR(key, {
-    dedupingInterval: 5000,
     fetcher: async (active, chainId, orderBookAddress, account) => {
       const provider = getProvider(library, chainId);
       const orderBookContract = new ethers.Contract(orderBookAddress, OrderBook.abi, provider);
