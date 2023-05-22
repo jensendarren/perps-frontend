@@ -435,7 +435,7 @@ export function useMinExecutionFee(library, active, chainId, infoTokens) {
   const positionRouterAddress = getContract(chainId, "PositionRouter");
   const nativeTokenAddress = getContract(chainId, "NATIVE_TOKEN");
 
-  const { data: minExecutionFee } = useSWR([active, chainId, positionRouterAddress, ""], {
+  const { data: minExecutionFee } = useSWR([active, chainId, positionRouterAddress, "minExecutionFee"], {
       dedupingInterval: 60000,
       fetcher: fetcher(library, PositionRouter),
   });
