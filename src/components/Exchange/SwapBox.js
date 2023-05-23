@@ -158,6 +158,7 @@ export default function SwapBox(props) {
     minExecutionFee,
     minExecutionFeeUSD,
     minExecutionFeeErrorMessage,
+    showModal,
   } = props;
 
   const [fromValue, setFromValue] = useState("");
@@ -1250,8 +1251,10 @@ export default function SwapBox(props) {
       } for ${formatAmount(toAmount, toToken.decimals, 4, true)} ${toToken.symbol}!`,
       failMsg: "Swap failed.",
       setPendingTxns,
+      showModal,
     })
       .then(async (res) => {})
+      .catch((e) => console.log("error: ", e))
       .finally(() => {
         setIsSubmitting(false);
       });
@@ -1268,8 +1271,10 @@ export default function SwapBox(props) {
         fromToken.symbol
       } for ${formatAmount(toAmount, toToken.decimals, 4, true)} ${toToken.symbol}!`,
       setPendingTxns,
+      showModal,
     })
       .then(async (res) => {})
+      .catch((e) => console.log("error: ", e))
       .finally(() => {
         setIsSubmitting(false);
       });
@@ -1379,10 +1384,12 @@ export default function SwapBox(props) {
       } for ${formatAmount(toAmount, toToken.decimals, 4, true)} ${toToken.symbol}!`,
       failMsg: "Swap failed.",
       setPendingTxns,
+      showModal,
     })
       .then(async () => {
         setIsConfirming(false);
       })
+      .catch((e) => console.log("error: ", e))
       .finally(() => {
         setIsSubmitting(false);
         setIsPendingConfirmation(false);
@@ -1552,6 +1559,7 @@ export default function SwapBox(props) {
       sentMsg: `${isLong ? "Long" : "Short"} submitted.`,
       failMsg: `${isLong ? "Long" : "Short"} failed.`,
       successMsg,
+      showModal,
     })
       .then(async () => {
         setIsConfirming(false);
@@ -1571,6 +1579,7 @@ export default function SwapBox(props) {
 
         setPendingPositions({ ...pendingPositions });
       })
+      .catch((e) => console.log("error: ", e))
       .finally(() => {
         setIsSubmitting(false);
         setIsPendingConfirmation(false);

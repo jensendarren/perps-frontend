@@ -90,6 +90,7 @@ import { getContract } from "./Addresses";
 import Vault from "./abis/Vault.json";
 import PositionRouter from "./abis/PositionRouter.json";
 import ReferralTerms from "./views/ReferralTerms/ReferralTerms";
+import { ModalProvider } from "./components/Modal/ModalProvider";
 
 const safeMultisigConnector = new SafeAppConnector();
 
@@ -681,18 +682,20 @@ function FullApp() {
               <Redirect to="/trade" />
             </Route>
             <Route exact path="/trade">
-              <Exchange
-                ref={exchangeRef}
-                savedShowPnlAfterFees={savedShowPnlAfterFees}
-                savedIsPnlInLeverage={savedIsPnlInLeverage}
-                setSavedIsPnlInLeverage={setSavedIsPnlInLeverage}
-                savedSlippageAmount={savedSlippageAmount}
-                setPendingTxns={setPendingTxns}
-                pendingTxns={pendingTxns}
-                savedShouldShowPositionLines={savedShouldShowPositionLines}
-                setSavedShouldShowPositionLines={setSavedShouldShowPositionLines}
-                connectWallet={connectWallet}
-              />
+              <ModalProvider>
+                <Exchange
+                  ref={exchangeRef}
+                  savedShowPnlAfterFees={savedShowPnlAfterFees}
+                  savedIsPnlInLeverage={savedIsPnlInLeverage}
+                  setSavedIsPnlInLeverage={setSavedIsPnlInLeverage}
+                  savedSlippageAmount={savedSlippageAmount}
+                  setPendingTxns={setPendingTxns}
+                  pendingTxns={pendingTxns}
+                  savedShouldShowPositionLines={savedShouldShowPositionLines}
+                  setSavedShouldShowPositionLines={setSavedShouldShowPositionLines}
+                  connectWallet={connectWallet}
+                />
+              </ModalProvider>
             </Route>
             <Route exact path="/dashboard">
               <Dashboard />
