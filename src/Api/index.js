@@ -40,6 +40,7 @@ import { getTokens, getWhitelistedTokens } from "../data/Tokens";
 
 import { polygonGraphClient, positionsGraphClient, quickGraphClient } from "./common";
 import { groupBy } from "lodash";
+import { TradeFailed } from "../components/Exchange/TradeFailed";
 export * from "./prices";
 
 const { AddressZero } = ethers.constants;
@@ -825,7 +826,7 @@ const USER_DENIED = "USER_DENIED";
 const SLIPPAGE = "SLIPPAGE";
 const TX_ERROR_PATTERNS = {
   [NOT_ENOUGH_FUNDS]: ["not enough funds for gas", "failed to execute call with revert code InsufficientGasFunds"],
-  [USER_DENIED]: ["User denied transaction signature"],
+  [USER_DENIED]: ["User denied transaction signature", "user rejected transaction"],
   [SLIPPAGE]: ["Router: mkt. price lower than limit", "Router: mkt. price higher than limit"],
 };
 export function extractError(ex) {
@@ -905,6 +906,9 @@ export async function callContract(chainId, contract, method, params, opts) {
     switch (type) {
       case NOT_ENOUGH_FUNDS:
         failMsg = <div>There is not enough ETH in your account on Polygon zkEVM to send this transaction.</div>;
+        if (opts.showModal) {
+          opts.showModal(<TradeFailed />)
+        }
         break;
       case USER_DENIED:
         failMsg = "Transaction was cancelled.";
@@ -912,6 +916,9 @@ export async function callContract(chainId, contract, method, params, opts) {
       case SLIPPAGE:
         failMsg =
           'The mkt. price has changed, consider increasing your Allowed Slippage by clicking on the "..." icon next to your address.';
+        if (opts.showModal) {
+          opts.showModal(<TradeFailed />)
+        }
         break;
       default:
         failMsg = (
@@ -921,6 +928,9 @@ export async function callContract(chainId, contract, method, params, opts) {
             {message && <ToastifyDebug>{message}</ToastifyDebug>}
           </div>
         );
+        if (opts.showModal) {
+          opts.showModal(<TradeFailed />)
+        }
     }
     helperToast.error(failMsg);
     throw e;

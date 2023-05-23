@@ -51,6 +51,8 @@ import Footer from "../../Footer";
 import Disclaimer from "../../components/Exchange/Disclaimer";
 
 import "./Exchange.css";
+import { TradeFailed } from "../../components/Exchange/TradeFailed";
+import { useModalContext } from "../../components/Modal/ModalProvider";
 const { AddressZero } = ethers.constants;
 
 const PENDING_POSITION_VALID_DURATION = 600 * 1000;
@@ -365,6 +367,8 @@ export const Exchange = forwardRef((props, ref) => {
     savedShouldDisableOrderValidation,
   } = props;
 
+  const { showModal } = useModalContext();
+
   const [pendingPositions, setPendingPositions] = useState({});
   const [updatedPositions, setUpdatedPositions] = useState({});
 
@@ -654,6 +658,8 @@ export const Exchange = forwardRef((props, ref) => {
       } within the allowed slippage, you can adjust the allowed slippage in the settings on the top right of the page.`;
 
       pushErrorNotification(chainId, message, e);
+      
+      showModal(<TradeFailed />);
 
       const key = getPositionKey(account, path[path.length - 1], indexToken, isLong);
       pendingPositions[key] = {};
@@ -686,6 +692,8 @@ export const Exchange = forwardRef((props, ref) => {
       } within the allowed slippage, you can adjust the allowed slippage in the settings on the top right of the page.`;
 
       pushErrorNotification(chainId, message, e);
+      
+      showModal(<TradeFailed />);
 
       const key = getPositionKey(account, path[path.length - 1], indexToken, isLong);
       pendingPositions[key] = {};
@@ -974,6 +982,7 @@ export const Exchange = forwardRef((props, ref) => {
             minExecutionFee={minExecutionFee}
             minExecutionFeeUSD={minExecutionFeeUSD}
             minExecutionFeeErrorMessage={minExecutionFeeErrorMessage}
+            showModal={showModal}
           />
           <div className="Exchange-wallet-tokens">
             <div className="Exchange-wallet-tokens-content">
