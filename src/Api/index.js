@@ -826,7 +826,7 @@ const USER_DENIED = "USER_DENIED";
 const SLIPPAGE = "SLIPPAGE";
 const TX_ERROR_PATTERNS = {
   [NOT_ENOUGH_FUNDS]: ["not enough funds for gas", "failed to execute call with revert code InsufficientGasFunds"],
-  [USER_DENIED]: ["User denied transaction signature"],
+  [USER_DENIED]: ["User denied transaction signature", "user rejected transaction"],
   [SLIPPAGE]: ["Router: mkt. price lower than limit", "Router: mkt. price higher than limit"],
 };
 export function extractError(ex) {
