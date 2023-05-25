@@ -714,39 +714,43 @@ export default function QlpSwap(props) {
                 </div>
               </div>
             )} */}
-            <div className="App-card-row">
-              <div className="label">APR</div>
-              <div className="value flex">
-                <span className="positive" style={{ marginRight: 6 }}>
-                  {quickAPR.toLocaleString()}%
-                </span>
-                <TooltipWithPortal
-                  handle={<img src={AIRDROPAPR} alt='airdrop APR' width={24} />}
-                  position="right-bottom"
-                  renderContent={() => <>Eth fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Quick airdrop APR: {quickAPR.toLocaleString()}%</>}
-                />
-                {/* <Tooltip
-                  className="positive"
-                  handle={`${formatAmount(totalApr, 2, 2, true)}%`}
-                  position="right-bottom"
-                  renderContent={() => {
-                    return (
-                      <>
-                        <div className="Tooltip-row">
-                          <span className="label">
-                            {nativeTokenSymbol} ({wrappedTokenSymbol}) APR
-                          </span>
-                          <span>{formatAmount(feeQlpTrackerApr, 2, 2, false)}%</span>
-                        </div>
-                        <div className="Tooltip-row">
-                          <span className="label">Escrowed QPX APR</span>
-                          <span>{formatAmount(stakedQlpTrackerApr, 2, 2, false)}%</span>
-                        </div>
-                      </>
-                    );
-                  }}
-                /> */}
+            <div className="App-airdrop-row">
+              <div>
+                <div className="label">APR</div>
+                <div className="value flex">
+                  <span className="positive" style={{ marginRight: 6 }}>
+                    {quickAPR.toLocaleString()}%
+                  </span>
+                  <TooltipWithPortal
+                    handle={<img src={AIRDROPAPR} alt='airdrop APR' width={24} />}
+                    position="right-bottom"
+                    renderContent={() => <>Eth fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Quick airdrop APR: {quickAPR.toLocaleString()}%</>}
+                  />
+                  {/* <Tooltip
+                    className="positive"
+                    handle={`${formatAmount(totalApr, 2, 2, true)}%`}
+                    position="right-bottom"
+                    renderContent={() => {
+                      return (
+                        <>
+                          <div className="Tooltip-row">
+                            <span className="label">
+                              {nativeTokenSymbol} ({wrappedTokenSymbol}) APR
+                            </span>
+                            <span>{formatAmount(feeQlpTrackerApr, 2, 2, false)}%</span>
+                          </div>
+                          <div className="Tooltip-row">
+                            <span className="label">Escrowed QPX APR</span>
+                            <span>{formatAmount(stakedQlpTrackerApr, 2, 2, false)}%</span>
+                          </div>
+                        </>
+                      );
+                    }}
+                  /> */}
+                </div>
               </div>
+              <p>Quick token airdrop happens every Friday.</p>
+              <p>Eth rewards are claimable every Friday.</p>
             </div>
             <div className="App-card-row">
               <div className="label">Total Supply</div>
