@@ -195,7 +195,7 @@ export default function ExchangeTVChart(props) {
             order.isLong ? "Long" : "Short"
           }`;
           const color = "#FFAA27";
-          if (window.tvWidget && window.tvWidget._ready && marketName.startsWith(indexToken.symbol))
+          if (window.tvWidget && window.tvWidget._ready && marketName.startsWith(tokenSymbol))
             lines.push(
               window.tvWidget
                 .activeChart()
