@@ -266,7 +266,7 @@ export default function QlpSwap(props) {
   const quickAPR = useMemo(() => {
     if (quickPrice > 0 && qlpSupplyUsd && qlpSupplyUsd > 0) {
       const qlpSupplyNumber = Number(formatAmount(qlpSupplyUsd, USD_DECIMALS, 2, false))
-      return quickPrice * 6000000 * 365 / qlpSupplyNumber
+      return quickPrice * 7500000 * 365 / qlpSupplyNumber
     }
     return 0
   }, [quickPrice, qlpSupplyUsd]);
