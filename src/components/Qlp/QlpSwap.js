@@ -271,6 +271,14 @@ export default function QlpSwap(props) {
     return 0
   }, [quickPrice, qlpSupplyUsd]);
 
+  const usdcAPR = useMemo(() => {
+    if (quickPrice > 0 && qlpSupplyUsd && qlpSupplyUsd > 0) {
+      const qlpSupplyNumber = Number(formatAmount(qlpSupplyUsd, USD_DECIMALS, 2, false))
+      return 3571 * 365 * 100 / qlpSupplyNumber
+    }
+    return 0
+  }, [quickPrice, qlpSupplyUsd]);
+
   let totalApr = bigNumberify(0);
 
   let feeQlpTrackerAnnualRewardsUsd;
@@ -719,12 +727,14 @@ export default function QlpSwap(props) {
                 <div className="label">APR</div>
                 <div className="value flex">
                   <span className="positive" style={{ marginRight: 6 }}>
-                    {(Number(formatAmount(totalApr, 2, 18, true)) + quickAPR).toLocaleString()}%
+                    {(Number(formatAmount(totalApr, 2, 18, true)) + quickAPR + usdcAPR).toLocaleString()}%
                   </span>
                   <TooltipWithPortal
                     handle={<img src={AIRDROPAPR} alt='airdrop APR' width={24} />}
                     position="right-bottom"
-                    renderContent={() => <>Eth fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Quick airdrop APR: {quickAPR.toLocaleString()}%</>}
+                    renderContent={
+                      () => <>Eth fee APR: {formatAmount(totalApr, 2, 2, true)}%<br/><br/>Quick airdrop APR: {quickAPR.toLocaleString()}%<br/><br/>USDC airdrop APR: {usdcAPR.toLocaleString()}%</>
+                    }
                   />
                   {/* <Tooltip
                     className="positive"
@@ -749,8 +759,9 @@ export default function QlpSwap(props) {
                   /> */}
                 </div>
               </div>
-              <p>Eth rewards are claimable during epoch periods: Friday to Friday.</p>
+              <p>Eth rewards are updated every Friday and claimable.</p>
               <p>Quick token airdrop happens every Friday.</p>
+              <p>USDC token airdrop happens every Friday.</p>
             </div>
             <div className="App-card-row">
               <div className="label">Total Supply</div>
