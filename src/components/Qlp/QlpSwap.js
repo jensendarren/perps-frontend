@@ -719,7 +719,7 @@ export default function QlpSwap(props) {
                 <div className="label">APR</div>
                 <div className="value flex">
                   <span className="positive" style={{ marginRight: 6 }}>
-                    {quickAPR.toLocaleString()}%
+                    {(Number(formatAmount(totalApr, 2, 18, true)) + quickAPR).toLocaleString()}%
                   </span>
                   <TooltipWithPortal
                     handle={<img src={AIRDROPAPR} alt='airdrop APR' width={24} />}
@@ -749,8 +749,8 @@ export default function QlpSwap(props) {
                   /> */}
                 </div>
               </div>
+              <p>Eth rewards are claimable during epoch periods: Friday to Friday.</p>
               <p>Quick token airdrop happens every Friday.</p>
-              <p>Eth rewards are claimable every Friday.</p>
             </div>
             <div className="App-card-row">
               <div className="label">Total Supply</div>
