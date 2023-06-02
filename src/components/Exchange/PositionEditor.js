@@ -183,10 +183,10 @@ export default function PositionEditor(props) {
 
     if (!isDeposit && fromAmount) {
       if (fromAmount.gte(position.collateral)) {
-        return "MIN ORDER: 10 USD";
+        return "MIN ORDER: 25 USD";
       }
-      if (position.collateral.sub(fromAmount).lt(expandDecimals(10, USD_DECIMALS))) {
-        return "MIN ORDER: 10 USD";
+      if (position.collateral.sub(fromAmount).lt(expandDecimals(25, USD_DECIMALS))) {
+        return "MIN ORDER: 25 USD";
       }
     }
 
@@ -203,8 +203,8 @@ export default function PositionEditor(props) {
       return "MIN LEVERAGE: 1.1x";
     }
 
-    if (nextLeverageExcludingPnl && nextLeverageExcludingPnl.gt(30.5 * BASIS_POINTS_DIVISOR)) {
-      return "MIN LEVERAGE: 30x";
+    if (nextLeverageExcludingPnl && nextLeverageExcludingPnl.gt(50.5 * BASIS_POINTS_DIVISOR)) {
+      return "MAX LEVERAGE: 50x";
     }
   };
 

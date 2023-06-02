@@ -840,8 +840,8 @@ export default function SwapBox(props) {
       return ["Enter a price"];
     }
 
-    if (!hasExistingPosition && fromUsdMin && fromUsdMin.lt(expandDecimals(10, USD_DECIMALS))) {
-      return ["Min order: 10 USD"];
+    if (!hasExistingPosition && fromUsdMin && fromUsdMin.lt(expandDecimals(25, USD_DECIMALS))) {
+      return ["Min order: 25 USD"];
     }
 
     if (leverage && leverage.lt(1.1 * BASIS_POINTS_DIVISOR)) {
