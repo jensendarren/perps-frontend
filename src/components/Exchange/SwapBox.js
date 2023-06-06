@@ -1713,6 +1713,11 @@ export default function SwapBox(props) {
   let feeBps;
   let swapFees;
   let positionFee;
+  let executionFee = 0;
+  let executionFeeUsd = 0;
+  let totalFeesUsd; // fees + executionFee
+  const nativeTokenSymbol = getConstant(chainId, "nativeTokenSymbol");
+
   if (isSwap) {
     if (fromAmount) {
       const { feeBasisPoints } = getNextToAmount(
@@ -1757,6 +1762,13 @@ export default function SwapBox(props) {
     }
     feeBps = feeBasisPoints;
   }
+  if (fromAmount > 0) {
+    executionFee = isMarketOrder ? minExecutionFee
+      : isSwap ? getConstant(chainId, "SWAP_ORDER_EXECUTION_GAS_FEE")
+        : getConstant(chainId, "INCREASE_ORDER_EXECUTION_GAS_FEE");
+    executionFeeUsd = getUsd(executionFee, nativeTokenAddress, false, infoTokens);
+  }
+  totalFeesUsd = feesUsd?.add(executionFeeUsd);
 
   const leverageMarks = {
     1: "1x",
@@ -2003,12 +2015,31 @@ export default function SwapBox(props) {
             <ExchangeInfoRow label="Fees">
               <div>
                 {!fees && "-"}
-                {fees && (
-                  <div>
-                    {formatAmount(feeBps, 2, 2, false)}%&nbsp; ({formatAmount(fees, fromToken.decimals, 4, true)}{" "}
-                    {fromToken.symbol}: ${formatAmount(feesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
-                  </div>
-                )}
+                {fees && (<>
+                  <Tooltip
+                    handle={`$${formatAmount(totalFeesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}`}
+                    position="right-bottom"
+                    renderContent={() => {
+                      return (
+                        <>
+                          <div>
+                            Swap Fee ({formatAmount(feeBps, 2, 2, false)}% of swap size):
+                            &nbsp; {formatAmount(fees, fromToken.decimals, 4, true)}
+                            &nbsp; {fromToken.symbol}
+                            &nbsp; (${formatAmount(feesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
+                          </div>
+                          <br />
+                          <div>
+                            Execution Fee: &nbsp;
+                            {formatAmount(executionFee, nativeTokenSymbol.decimals, nativeTokenSymbol.displayDecimals, true)}
+                            &nbsp; {nativeTokenSymbol}
+                            &nbsp; (${formatAmount(executionFeeUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
+                          </div>
+                        </>
+                      );
+                    }}
+                  />
+                </>)}
               </div>
             </ExchangeInfoRow>
           </div>
@@ -2134,7 +2165,7 @@ export default function SwapBox(props) {
                 {!feesUsd && "-"}
                 {feesUsd && (
                   <Tooltip
-                    handle={`$${formatAmount(feesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}`}
+                    handle={`$${formatAmount(totalFeesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}`}
                     position="right-bottom"
                     renderContent={() => {
                       return (
@@ -2143,15 +2174,22 @@ export default function SwapBox(props) {
                             <div>
                               {collateralToken.symbol} is required for collateral. <br />
                               <br />
-                              Swap {fromToken.symbol} to {collateralToken.symbol} Fee: $
+                              Swap {fromToken.symbol} to {collateralToken.symbol} Fee: &nbsp;$
                               {formatAmount(swapFees, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}
                               <br />
                               <br />
                             </div>
                           )}
                           <div>
-                            Position Fee (0.1% of position size): $
+                            Position Fee (0.1% of position size): &nbsp;$
                             {formatAmount(positionFee, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}
+                          </div>
+                          <br />
+                          <div>
+                            Execution Fee: &nbsp;
+                            {formatAmount(executionFee, nativeTokenSymbol.decimals, nativeTokenSymbol.displayDecimals, true)}
+                            &nbsp; {nativeTokenSymbol}
+                            &nbsp; (${formatAmount(executionFeeUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
                           </div>
                         </>
                       );
@@ -2442,6 +2480,11 @@ export default function SwapBox(props) {
           minExecutionFee={minExecutionFee}
           minExecutionFeeUSD={minExecutionFeeUSD}
           minExecutionFeeErrorMessage={minExecutionFeeErrorMessage}
+          totalFeesUsd={totalFeesUsd}
+          executionFee={executionFee}
+          executionFeeUsd={executionFeeUsd}
+          swapFees={swapFees}
+          positionFee={positionFee}
         />
       )}
     </div>
