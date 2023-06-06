@@ -95,6 +95,11 @@ export default function ConfirmationBox(props) {
     feeBps,
     chainId,
     orders,
+    totalFeesUsd,
+    executionFeeUsd,
+    executionFee,
+    swapFees,
+    positionFee,
   } = props;
 
   const [savedSlippageAmount] = useLocalStorageSerializeKey([chainId, SLIPPAGE_BPS_KEY], DEFAULT_SLIPPAGE_AMOUNT);
@@ -216,7 +221,7 @@ export default function ConfirmationBox(props) {
     if (spread && spread.isHigh) {
       return (
         <div className="Confirmation-box-warning">
-          The spread is > 1%, please ensure the trade details are acceptable before comfirming
+          The spread is &gt; 1%, please ensure the trade details are acceptable before comfirming
         </div>
       );
     }
@@ -406,20 +411,9 @@ export default function ConfirmationBox(props) {
       </div>
     );
   }, [isSwap, fromAmount, fromToken, toToken, fromUsdMin, toUsdMax, isLong, toAmount]);
+  
+  const nativeTokenSymbol = getConstant(chainId, "nativeTokenSymbol");
 
-  const SWAP_ORDER_EXECUTION_GAS_FEE = getConstant(chainId, "SWAP_ORDER_EXECUTION_GAS_FEE");
-  const INCREASE_ORDER_EXECUTION_GAS_FEE = getConstant(chainId, "INCREASE_ORDER_EXECUTION_GAS_FEE");
-  const executionFee = isSwap ? SWAP_ORDER_EXECUTION_GAS_FEE : INCREASE_ORDER_EXECUTION_GAS_FEE;
-  const renderExecutionFee = useCallback(() => {
-    if (isMarketOrder) {
-      return null;
-    }
-    return (
-      <ExchangeInfoRow label="Execution Fee">
-        {formatAmount(executionFee, 18, 3)} {getNativeToken(chainId).symbol}
-      </ExchangeInfoRow>
-    );
-  }, [isMarketOrder, executionFee, chainId]);
 
   const renderAvailableLiquidity = useCallback(() => {
     let availableLiquidity;
@@ -533,7 +527,37 @@ export default function ConfirmationBox(props) {
             {!displayLiquidationPrice && `-`}
           </ExchangeInfoRow>
           <ExchangeInfoRow label="Fees">
-            ${formatAmount(feesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}
+            <Tooltip
+              handle={`$${formatAmount(totalFeesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}`}
+              position="right-bottom"
+              renderContent={() => {
+                return (
+                  <>
+                    {swapFees && (
+                      <div>
+                        {fromToken.symbol} is required for collateral. <br />
+                        <br />
+                        Swap {fromToken.symbol} to {fromToken.symbol} Fee: &nbsp;$
+                        {formatAmount(swapFees, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}
+                        <br />
+                        <br />
+                      </div>
+                    )}
+                    <div>
+                      Position Fee (0.1% of position size): &nbsp;$
+                      {formatAmount(positionFee, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}
+                    </div>
+                    <br />
+                    <div>
+                      Execution Fee: &nbsp;
+                      {formatAmount(executionFee, nativeTokenSymbol.decimals, nativeTokenSymbol.displayDecimals, true)}
+                      &nbsp; {nativeTokenSymbol}
+                      &nbsp; (${formatAmount(executionFeeUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
+                    </div>
+                  </>
+                );
+              }}
+            />
           </ExchangeInfoRow>
           <ExchangeInfoRow label="Collateral">
             <Tooltip
@@ -613,7 +637,6 @@ export default function ConfirmationBox(props) {
               </Checkbox>
             </div>
           )}
-          {renderExecutionFee()}
         </div>
       </>
     );
@@ -635,7 +658,6 @@ export default function ConfirmationBox(props) {
     existingLiquidationPrice,
     feesUsd,
     leverage,
-    renderExecutionFee,
     shortCollateralToken,
     renderExistingOrderWarning,
     chainId,
@@ -678,11 +700,38 @@ export default function ConfirmationBox(props) {
           <div className="Exchange-info-row">
             <div className="Exchange-info-label">Fees</div>
             <div className="align-right">
-              {formatAmount(feeBps, 2, 2, true)}% ({formatAmount(fees, fromTokenInfo.decimals, 4, true)}{" "}
+              <Tooltip
+                handle={`$${formatAmount(totalFeesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}`}
+                position="right-bottom"
+                renderContent={() => {
+                  return (
+                    <>
+                      <div>
+                        Swap Fee ({formatAmount(feeBps, 2, 2, false)}% of swap size):
+                        &nbsp; {formatAmount(fees, fromToken.decimals, 4, true)}
+                        &nbsp; {fromToken.symbol}
+                        &nbsp; (${formatAmount(feesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
+                      </div>
+                      <br />
+                      <div>
+                        Execution Fee: &nbsp;
+                        {formatAmount(executionFee, nativeTokenSymbol.decimals, nativeTokenSymbol.displayDecimals, true)}
+                        &nbsp; {nativeTokenSymbol}
+                        &nbsp; (${formatAmount(executionFeeUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
+                      </div>
+                    </>
+                  );
+                }}
+              />
+            </div>
+          </div>
+          <div className="Exchange-info-row">
+            <div className="Exchange-info-label">Fees</div>
+            <div className="align-right">
+            {formatAmount(feeBps, 2, 2, true)}% ({formatAmount(fees, fromTokenInfo.decimals, 4, true)}{" "}
               {fromTokenInfo.symbol}: ${formatAmount(feesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
             </div>
           </div>
-          {renderExecutionFee()}
           {fromTokenUsd && (
             <div className="Exchange-info-row">
               <div className="Exchange-info-label">{fromTokenInfo.symbol} Price</div>
@@ -707,7 +756,6 @@ export default function ConfirmationBox(props) {
     spread,
     feesUsd,
     feeBps,
-    renderExecutionFee,
     fromTokenUsd,
     toTokenUsd,
     triggerRatio,
