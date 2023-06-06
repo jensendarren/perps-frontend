@@ -713,13 +713,15 @@ export default function ConfirmationBox(props) {
                         &nbsp; {fromToken.symbol}
                         &nbsp; (${formatAmount(feesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
                       </div>
-                      <br />
-                      <div>
-                        Execution Fee: &nbsp;
-                        {formatAmount(executionFee, nativeTokenSymbol.decimals, nativeTokenSymbol.displayDecimals, true)}
-                        &nbsp; {nativeTokenSymbol}
-                        &nbsp; (${formatAmount(executionFeeUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
-                      </div>
+                      {isMarketOrder ? <></> : (<>
+                        <br />
+                        <div>
+                          Execution Fee: &nbsp;
+                          {formatAmount(executionFee, nativeTokenSymbol.decimals, nativeTokenSymbol.displayDecimals, true)}
+                          &nbsp; {nativeTokenSymbol}
+                          &nbsp; (${formatAmount(executionFeeUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
+                        </div></>)
+                      }
                     </>
                   );
                 }}

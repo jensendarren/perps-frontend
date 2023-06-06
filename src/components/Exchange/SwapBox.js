@@ -1762,11 +1762,15 @@ export default function SwapBox(props) {
     }
     feeBps = feeBasisPoints;
   }
-  if (fromAmount > 0) {
-    executionFee = isMarketOrder ? minExecutionFee
-      : isSwap ? getConstant(chainId, "SWAP_ORDER_EXECUTION_GAS_FEE")
-        : getConstant(chainId, "INCREASE_ORDER_EXECUTION_GAS_FEE");
-    executionFeeUsd = getUsd(executionFee, nativeTokenAddress, false, infoTokens);
+  if (fromAmount?.gt(bigNumberify(0))) {
+    if (isSwap && isMarketOrder) {executionFee = 0;}
+    if (isSwap && !isMarketOrder) {executionFee = getConstant(chainId, "SWAP_ORDER_EXECUTION_GAS_FEE");}
+    if (!isSwap && isMarketOrder) {executionFee = getConstant(chainId, "INCREASE_ORDER_EXECUTION_GAS_FEE");}
+    if (!isSwap && !isMarketOrder) {executionFee = minExecutionFee;}
+
+    if (executionFee > 0) {
+      executionFeeUsd = getUsd(executionFee, nativeTokenAddress, false, infoTokens);
+    }
   }
   totalFeesUsd = feesUsd?.add(executionFeeUsd);
 
@@ -2028,13 +2032,15 @@ export default function SwapBox(props) {
                             &nbsp; {fromToken.symbol}
                             &nbsp; (${formatAmount(feesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
                           </div>
-                          <br />
-                          <div>
-                            Execution Fee: &nbsp;
-                            {formatAmount(executionFee, nativeTokenSymbol.decimals, nativeTokenSymbol.displayDecimals, true)}
-                            &nbsp; {nativeTokenSymbol}
-                            &nbsp; (${formatAmount(executionFeeUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
-                          </div>
+                          {isMarketOrder ? <></> : (<>
+                            <br />
+                            <div>
+                              Execution Fee: &nbsp;
+                              {formatAmount(executionFee, nativeTokenSymbol.decimals, nativeTokenSymbol.displayDecimals, true)}
+                              &nbsp; {nativeTokenSymbol}
+                              &nbsp; (${formatAmount(executionFeeUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
+                            </div></>)
+                          }
                         </>
                       );
                     }}
