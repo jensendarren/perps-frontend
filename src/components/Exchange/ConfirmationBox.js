@@ -105,6 +105,8 @@ export default function ConfirmationBox(props) {
   const [savedSlippageAmount] = useLocalStorageSerializeKey([chainId, SLIPPAGE_BPS_KEY], DEFAULT_SLIPPAGE_AMOUNT);
   const [isProfitWarningAccepted, setIsProfitWarningAccepted] = useState(false);
 
+  const collateralToken = getToken(chainId, collateralTokenAddress);
+
   let minOut;
   let fromTokenUsd;
   let toTokenUsd;
@@ -244,7 +246,6 @@ export default function ConfirmationBox(props) {
       return null;
     }
 
-    const collateralToken = getToken(chainId, collateralTokenAddress);
     return (
       <div className="Confirmation-box-warning">
         Fees are high to swap from {fromToken.symbol} to {collateralToken.symbol}. <br />
@@ -535,9 +536,9 @@ export default function ConfirmationBox(props) {
                   <>
                     {swapFees && (
                       <div>
-                        {fromToken.symbol} is required for collateral. <br />
+                        {collateralToken.symbol} is required for collateral. <br />
                         <br />
-                        Swap {fromToken.symbol} to {fromToken.symbol} Fee: &nbsp;$
+                        Swap {fromToken.symbol} to {collateralToken.symbol} Fee: &nbsp;$
                         {formatAmount(swapFees, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)}
                         <br />
                         <br />
