@@ -725,13 +725,6 @@ export default function ConfirmationBox(props) {
               />
             </div>
           </div>
-          <div className="Exchange-info-row">
-            <div className="Exchange-info-label">Fees</div>
-            <div className="align-right">
-            {formatAmount(feeBps, 2, 2, true)}% ({formatAmount(fees, fromTokenInfo.decimals, 4, true)}{" "}
-              {fromTokenInfo.symbol}: ${formatAmount(feesUsd, USD_DECIMALS, USD_DISPLAY_DECIMALS, true)})
-            </div>
-          </div>
           {fromTokenUsd && (
             <div className="Exchange-info-row">
               <div className="Exchange-info-label">{fromTokenInfo.symbol} Price</div>
