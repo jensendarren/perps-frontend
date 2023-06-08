@@ -759,9 +759,48 @@ export default function QlpSwap(props) {
                   /> */}
                 </div>
               </div>
-              <p>Eth rewards are updated every Friday and claimable.</p>
-              <p>Quick token airdrop happens every Friday.</p>
-              <p>USDC token airdrop happens every Friday.</p>
+              <div className="App-airdrop-text-row">
+                <img
+                  src={
+                    getImageUrl({
+                      path: `coins/others/eth-original`,
+                      format: "png",
+                    })
+                  }
+                  alt='eth'
+                  width={24}
+                  height={24}
+                />
+                <p>ETH rewards are updated every Friday and claimable.</p>
+              </div>
+              <div className="App-airdrop-text-row">
+                <img
+                  src={
+                    getImageUrl({
+                      path: `coins/others/quick-original`,
+                      format: "png",
+                    })
+                  }
+                  alt='quick'
+                  width={24}
+                  height={24}
+                />
+                <p>QUICK token airdrop happens every Friday.</p>
+              </div>
+              <div className="App-airdrop-text-row">
+                <img
+                  src={
+                    getImageUrl({
+                      path: `coins/others/usdc-original`,
+                      format: "png",
+                    })
+                  }
+                  alt='usdc'
+                  width={24}
+                  height={24}
+                />
+                <p>USDC token airdrop happens every Friday.</p>
+              </div>
             </div>
             <div className="App-card-row">
               <div className="label">Total Supply</div>
