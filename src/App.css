@@ -712,6 +712,16 @@ button.App-connect-wallet:hover {
   text-align: right;
 }
 
+.App-airdrop-row .App-airdrop-text-row {
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+
+.App-airdrop-text-row p {
+  margin-left: 3px;
+  margin-bottom: 0;
+}
+
 .App-card-row:last-child {
   border: none;
 }
