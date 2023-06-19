@@ -266,7 +266,7 @@ export default function QlpSwap(props) {
   const quickAPR = useMemo(() => {
     if (quickPrice > 0 && qlpSupplyUsd && qlpSupplyUsd > 0) {
       const qlpSupplyNumber = Number(formatAmount(qlpSupplyUsd, USD_DECIMALS, 2, false))
-      return quickPrice * 7500000 * 365 / qlpSupplyNumber
+      return quickPrice * 6000000 * 365 / qlpSupplyNumber
     }
     return 0
   }, [quickPrice, qlpSupplyUsd]);
@@ -274,7 +274,7 @@ export default function QlpSwap(props) {
   const usdcAPR = useMemo(() => {
     if (quickPrice > 0 && qlpSupplyUsd && qlpSupplyUsd > 0) {
       const qlpSupplyNumber = Number(formatAmount(qlpSupplyUsd, USD_DECIMALS, 2, false))
-      return 3571 * 365 * 100 / qlpSupplyNumber
+      return 15000 * 365 * 100 / (7 * qlpSupplyNumber)
     }
     return 0
   }, [quickPrice, qlpSupplyUsd]);
