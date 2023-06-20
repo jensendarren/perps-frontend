@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { gql } from "@apollo/client";
 import { useState, useEffect } from "react";
 import useSWR from "swr";
+import Token from "../abis/Token.json";
 
 import OrderBook from "../abis/OrderBook.json";
 import PositionManager from "../abis/PositionManager.json";
@@ -98,6 +99,20 @@ export function useQuickInfo(chainId) {
   }, [query, chainId]);
 
   return res ? res.data.token : null;
+}
+
+export async function fetchTotalTokenWeights(library, chainId, active) {
+  const vaultAddress = getContract(chainId, "Vault");
+  const args = [`Exchange:totalTokenWeights:${active}`, chainId, vaultAddress, "totalTokenWeights"];
+  const totalTokenWeights =  await fetcher(library, Vault)(...args);
+  return totalTokenWeights;
+}
+
+export async function fetchUsdqSupply(library, chainId, active) {
+  const usdqAddress = getContract(chainId, "USDQ");
+  const args = [`Exchange:usdqSupply:${active}`, chainId, usdqAddress, "totalSupply"];
+  const usdqSupply =  await fetcher(library, Token)(...args);
+  return usdqSupply;
 }
 
 export async function fetchInfoTokens(library, chainId, active, tokenBalances, fundingRateInfo, vaultPropsLength) {
