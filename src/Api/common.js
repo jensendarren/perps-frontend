@@ -1,4 +1,6 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import fetch from 'cross-fetch';
+
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 
 export const chainlinkClient = createClient(process.env.REACT_APP_PRICE_SUBGRAPH);
 
@@ -11,10 +13,10 @@ export const positionsGraphClient = createClient(process.env.REACT_APP_QPX_POSIT
 
 export const polygonReferralsGraphClient = createClient(process.env.REACT_APP_QPX_REFERRAL_SUBGRAPH);
 
-
 function createClient(uri) {
   return new ApolloClient({
     uri,
     cache: new InMemoryCache(),
+    link: new HttpLink({ uri: '/graphql', fetch })
   });
 }

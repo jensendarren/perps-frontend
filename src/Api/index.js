@@ -40,7 +40,7 @@ import { getTokens, getWhitelistedTokens } from "../data/Tokens";
 
 import { polygonGraphClient, positionsGraphClient, quickGraphClient } from "./common";
 import { groupBy } from "lodash";
-import { TradeFailed } from "../components/Exchange/TradeFailed";
+// import { TradeFailed } from "../components/Exchange/TradeFailed";
 export * from "./prices";
 
 const { AddressZero } = ethers.constants;
@@ -100,7 +100,44 @@ export function useQuickInfo(chainId) {
   return res ? res.data.token : null;
 }
 
-export function useInfoTokens(library, chainId, active, tokenBalances, fundingRateInfo, vaultPropsLength) {
+export async function fetchInfoTokens(library, chainId, active, tokenBalances, fundingRateInfo, vaultPropsLength) {
+  const tokens = getTokens(chainId);
+  const vaultReaderAddress = getContract(chainId, "VaultReader");
+  const vaultAddress = getContract(chainId, "Vault");
+  const positionRouterAddress = getContract(chainId, "PositionRouter");
+  const nativeTokenAddress = getContract(chainId, "NATIVE_TOKEN");
+  const whitelistedTokens = getWhitelistedTokens(chainId);
+  const whitelistedTokenAddresses = whitelistedTokens.map((token) => token.address);
+
+  // Args for contract call
+  const args = [`useInfoTokens:${active}`, chainId, vaultReaderAddress, "getVaultTokenInfoV4"];
+
+  // Use fetcher for calling the contract
+  const vaultTokenInfo = await fetcher(library, VaultReader, [
+        vaultAddress,
+        positionRouterAddress,
+        nativeTokenAddress,
+        expandDecimals(1, 18),
+        whitelistedTokenAddresses,
+      ])(...args);
+
+  const indexPrices = [];
+
+  return {
+    infoTokens: getInfoTokens(
+      tokens,
+      tokenBalances,
+      whitelistedTokens,
+      vaultTokenInfo,
+      fundingRateInfo,
+      vaultPropsLength,
+      indexPrices,
+      nativeTokenAddress
+    ),
+  };
+}
+
+export async function useInfoTokens(library, chainId, active, tokenBalances, fundingRateInfo, vaultPropsLength) {
   const tokens = getTokens(chainId);
   const vaultReaderAddress = getContract(chainId, "VaultReader");
   const vaultAddress = getContract(chainId, "Vault");
@@ -847,19 +884,19 @@ export function extractError(ex) {
   return [message];
 }
 
-function ToastifyDebug(props) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="Toastify-debug">
-      {!open && (
-        <span className="Toastify-debug-button" onClick={() => setOpen(true)}>
-          Show error
-        </span>
-      )}
-      {open && props.children}
-    </div>
-  );
-}
+// function ToastifyDebug(props) {
+//   const [open, setOpen] = useState(false);
+//   return (
+//     <div className="Toastify-debug">
+//       {!open && (
+//         <span className="Toastify-debug-button" onClick={() => setOpen(true)}>
+//           Show error
+//         </span>
+//       )}
+//       {open && props.children}
+//     </div>
+//   );
+// }
 
 export async function callContract(chainId, contract, method, params, opts) {
   try {
@@ -883,15 +920,15 @@ export async function callContract(chainId, contract, method, params, opts) {
     const res = await contract[method](...params, txnOpts);
     const txUrl = getExplorerUrl(chainId) + "tx/" + res.hash;
     const sentMsg = opts.sentMsg || "Transaction sent.";
-    helperToast.success(
-      <div>
-        {sentMsg}{" "}
-        <a style={{ color: "#ffaa27" }} href={txUrl} target="_blank" rel="noopener noreferrer">
-          View status.
-        </a>
-        <br />
-      </div>
-    );
+    // helperToast.success(
+    //   <div>
+    //     {sentMsg}{" "}
+    //     <a style={{ color: "#ffaa27" }} href={txUrl} target="_blank" rel="noopener noreferrer">
+    //       View status.
+    //     </a>
+    //     <br />
+    //   </div>
+    // );
     if (opts.setPendingTxns) {
       const pendingTxn = {
         hash: res.hash,
@@ -905,9 +942,9 @@ export async function callContract(chainId, contract, method, params, opts) {
     const [message, type] = extractError(e);
     switch (type) {
       case NOT_ENOUGH_FUNDS:
-        failMsg = <div>There is not enough ETH in your account on Polygon zkEVM to send this transaction.</div>;
+        // failMsg = <div>There is not enough ETH in your account on Polygon zkEVM to send this transaction.</div>;
         if (opts.showModal) {
-          opts.showModal(<TradeFailed />)
+          // opts.showModal(<TradeFailed />)
         }
         break;
       case USER_DENIED:
@@ -917,19 +954,19 @@ export async function callContract(chainId, contract, method, params, opts) {
         failMsg =
           'The mkt. price has changed, consider increasing your Allowed Slippage by clicking on the "..." icon next to your address.';
         if (opts.showModal) {
-          opts.showModal(<TradeFailed />)
+          // opts.showModal(<TradeFailed />)
         }
         break;
       default:
-        failMsg = (
-          <div>
-            {opts.failMsg || "Transaction failed."}
-            <br />
-            {message && <ToastifyDebug>{message}</ToastifyDebug>}
-          </div>
-        );
+        // failMsg = (
+        //   <div>
+        //     {opts.failMsg || "Transaction failed."}
+        //     <br />
+        //     {message && <ToastifyDebug>{message}</ToastifyDebug>}
+        //   </div>
+        // );
         if (opts.showModal) {
-          opts.showModal(<TradeFailed />)
+          // opts.showModal(<TradeFailed />)
         }
     }
     helperToast.error(failMsg);

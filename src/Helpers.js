@@ -1925,71 +1925,71 @@ export async function getGasLimit(contract, method, params = [], value, gasBuffe
   return gasLimit.add(gasBuffer);
 }
 
-export function approveTokens({
-  setIsApproving,
-  library,
-  tokenAddress,
-  spender,
-  chainId,
-  onApproveSubmitted,
-  getTokenInfo,
-  infoTokens,
-  pendingTxns,
-  setPendingTxns,
-  includeMessage,
-}) {
-  setIsApproving(true);
-  const contract = new ethers.Contract(tokenAddress, Token.abi, library.getSigner());
-  contract
-    .approve(spender, ethers.constants.MaxUint256)
-    .then(async (res) => {
-      const txUrl = getExplorerUrl(chainId) + "tx/" + res.hash;
-      helperToast.success(
-        <div>
-          Approval submitted!{" "}
-          <a style={{ color: "#ffaa27" }} href={txUrl} target="_blank" rel="noopener noreferrer">
-            View status.
-          </a>
-          <br />
-        </div>
-      );
-      if (onApproveSubmitted) {
-        onApproveSubmitted();
-      }
-      if (getTokenInfo && infoTokens && pendingTxns && setPendingTxns) {
-        const token = getTokenInfo(infoTokens, tokenAddress);
-        const pendingTxn = {
-          hash: res.hash,
-          message: includeMessage ? `${token.symbol} Approved!` : false,
-        };
-        setPendingTxns([...pendingTxns, pendingTxn]);
-      }
-    })
-    .catch((e) => {
-      console.error(e);
-      let failMsg;
-      if (
-        ["not enough funds for gas", "failed to execute call with revert code InsufficientGasFunds"].includes(
-          e.data?.message
-        )
-      ) {
-        failMsg = (
-          <div>
-            There is not enough ETH in your account on Polygon zkEVM to send this transaction.
-            <br />
-          </div>
-        );
-      } else if (e.message?.includes("User denied transaction signature")) {
-        failMsg = "Approval was cancelled.";
-      } else {
-        failMsg = "Approval failed.";
-      }
-      helperToast.error(failMsg);
-    })
-    .finally(() => {
-      setIsApproving(false);
-    });
-}
+// export function approveTokens({
+//   setIsApproving,
+//   library,
+//   tokenAddress,
+//   spender,
+//   chainId,
+//   onApproveSubmitted,
+//   getTokenInfo,
+//   infoTokens,
+//   pendingTxns,
+//   setPendingTxns,
+//   includeMessage,
+// }) {
+//   setIsApproving(true);
+//   const contract = new ethers.Contract(tokenAddress, Token.abi, library.getSigner());
+//   contract
+//     .approve(spender, ethers.constants.MaxUint256)
+//     .then(async (res) => {
+//       const txUrl = getExplorerUrl(chainId) + "tx/" + res.hash;
+//       helperToast.success(
+//         <div>
+//           Approval submitted!{" "}
+//           <a style={{ color: "#ffaa27" }} href={txUrl} target="_blank" rel="noopener noreferrer">
+//             View status.
+//           </a>
+//           <br />
+//         </div>
+//       );
+//       if (onApproveSubmitted) {
+//         onApproveSubmitted();
+//       }
+//       if (getTokenInfo && infoTokens && pendingTxns && setPendingTxns) {
+//         const token = getTokenInfo(infoTokens, tokenAddress);
+//         const pendingTxn = {
+//           hash: res.hash,
+//           message: includeMessage ? `${token.symbol} Approved!` : false,
+//         };
+//         setPendingTxns([...pendingTxns, pendingTxn]);
+//       }
+//     })
+//     .catch((e) => {
+//       console.error(e);
+//       let failMsg;
+//       if (
+//         ["not enough funds for gas", "failed to execute call with revert code InsufficientGasFunds"].includes(
+//           e.data?.message
+//         )
+//       ) {
+//         failMsg = (
+//           <div>
+//             There is not enough ETH in your account on Polygon zkEVM to send this transaction.
+//             <br />
+//           </div>
+//         );
+//       } else if (e.message?.includes("User denied transaction signature")) {
+//         failMsg = "Approval was cancelled.";
+//       } else {
+//         failMsg = "Approval failed.";
+//       }
+//       helperToast.error(failMsg);
+//     })
+//     .finally(() => {
+//       setIsApproving(false);
+//     });
+// }
 
 export const shouldRaiseGasError = (token, amount) => {
   if (!amount) {
@@ -2084,32 +2084,32 @@ export const getWalletConnectHandler = (activate, deactivate, setActivatingConne
   return fn;
 };
 
-export const getInjectedHandler = (activate) => {
-  const fn = async () => {
-    activate(getInjectedConnector(), (e) => {
-      const chainId = localStorage.getItem(SELECTED_NETWORK_LOCAL_STORAGE_KEY) || DEFAULT_CHAIN_ID;
+// export const getInjectedHandler = (activate) => {
+//   const fn = async () => {
+//     activate(getInjectedConnector(), (e) => {
+//       const chainId = localStorage.getItem(SELECTED_NETWORK_LOCAL_STORAGE_KEY) || DEFAULT_CHAIN_ID;
 
-      if (e instanceof UnsupportedChainIdError) {
-        helperToast.error(
-          <div>
-            <div>Your wallet is not connected to {getChainName(chainId)}.</div>
-            <br />
-            <div className="clickable underline margin-bottom" onClick={() => switchNetwork(chainId, true)}>
-              Switch to {getChainName(chainId)}
-            </div>
-            <div className="clickable underline" onClick={() => switchNetwork(chainId, true)}>
-              Add {getChainName(chainId)}
-            </div>
-          </div>
-        );
-        return;
-      }
-      const errString = e.message ?? e.toString();
-      helperToast.error(errString);
-    });
-  };
-  return fn;
-};
+//       if (e instanceof UnsupportedChainIdError) {
+//         helperToast.error(
+//           <div>
+//             <div>Your wallet is not connected to {getChainName(chainId)}.</div>
+//             <br />
+//             <div className="clickable underline margin-bottom" onClick={() => switchNetwork(chainId, true)}>
+//               Switch to {getChainName(chainId)}
+//             </div>
+//             <div className="clickable underline" onClick={() => switchNetwork(chainId, true)}>
+//               Add {getChainName(chainId)}
+//             </div>
+//           </div>
+//         );
+//         return;
+//       }
+//       const errString = e.message ?? e.toString();
+//       helperToast.error(errString);
+//     });
+//   };
+//   return fn;
+// };
 
 export function isMobileDevice(navigator) {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
